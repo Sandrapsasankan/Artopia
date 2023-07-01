@@ -1,117 +1,193 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:helloworld/forget.dart';
-import 'package:helloworld/home.dart';
-
-import 'register.dart';
-
-
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
- // static const String _title = 'Sample App';
+import 'package:helloworld/artist/Ahome.dart';
+import 'package:helloworld/Home.dart';
+import 'package:helloworld/api_service/api.dart';
+import 'package:helloworld/choose.dart';
+import 'package:helloworld/customer/forget.dart';
+import 'package:helloworld/customer/home.dart';
+import 'package:helloworld/register.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+class login extends StatefulWidget {
+  const login({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-
-      home: Scaffold(
-
-        body: const MyStatefulWidget(),
-      ),
-    );
-  }
+  State<login> createState() => _loginState();
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class _loginState extends State<login> {
+  late SharedPreferences localStorage;
+  String role = "";
+  String status = "";
+  String user = "user";
+  String artist = "artist";
+  String storedvalue = "1";
+  TextEditingController userController = TextEditingController();
+  TextEditingController pwdController = TextEditingController();
 
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  _pressLoginButton() async {
+    setState(() {
+      var _isLoading = true;
+    });
+    var data = {
+      'username': userController.text.trim(), //username for email
+      'password': pwdController.text.trim()
+    };
+    var res = await Api().authData(data, '/api/user_login');
+    var body = json.decode(res.body);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: <Widget>[
-            SizedBox(height: 160,),
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.deepPurple),
-                )),
+    if (body['success'] == true) {
+      print(body);
 
-            SizedBox(height: 50,),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(),
-                  labelText: 'Username',
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: TextField(
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.lock),
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Fpassword()));
-                //forgot password screen
-              },
-              child: const Text('Forgot Password',),
-            ),
-            Container(
-                height: 50,
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Login'),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Homepage()));
-                    print(nameController.text);
-                    print(passwordController.text);
-                  },
-                )
-            ),
-            Row(
-              children: <Widget>[
-                const Text('Does not have account?'),
-                TextButton(
-                  child: const Text(
-                    'Sign up',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupPage()));
-                    //signup screen
-                  },
-                )
-              ],
-              mainAxisAlignment: MainAxisAlignment.center,
-            ),
-          ],
+      role = body['data']['role'];
+      status = body['data']['l_status'];
+
+      localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('role', role.toString());
+      localStorage.setInt('login_id', body['data']['login_id']);
+      localStorage.setInt('user_id', body['data']['user_id']);
+
+      print('login_id ${body['data']['login_id']}');
+      print('user_id ${body['data']['user_id']}');
+
+      //      if (user == role.replaceAll('"', '') &&
+      //      storedvalue == status.replaceAll('"', '')) {
+      //    Navigator.push(
+      //        context, MaterialPageRoute(builder: (context) => MyHomePage()));
+      //  } else if (doctor == role.replaceAll('"', '') &&
+      //      storedvalue == status.replaceAll('"', '')) {
+      //    Navigator.of(context).push(MaterialPageRoute(
+      //      builder: (context) => DoctHome(),
+      //    ));
+      // }
+
+      if (user == role &&
+          storedvalue == status) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Homescreen()));
+      }
+      else if (artist == role &&
+          storedvalue == status) {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Ahome(),
         ));
+      } else {
+        Fluttertoast.showToast(
+          msg: "Please wait for admin approval",
+          backgroundColor: Colors.grey,
+        );
+      }
+    }
 
+    //  else {
+    //   Fluttertoast.showToast(
+    //     msg: body['message'].toString(),
+    //     backgroundColor: Colors.grey,
+    //   );
+    }
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("LOGIN", style: TextStyle(color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+
+              ),
+              SizedBox(height: 20.0,),
+              Align(alignment: Alignment.center,
+                child: Text('welcome back!',
+                  style: TextStyle(color: Colors.black, fontSize: 17),
+                  textAlign: TextAlign.center,),
+
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: TextField(
+                  controller: userController,
+                  decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.person),
+                    labelText: "username",
+                    hintText: "username",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+
+                  ),
+
+
+                ),
+              ), SizedBox(height: 20),
+
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: TextField(
+                  controller: pwdController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+
+                      prefixIcon: Icon(Icons.lock),
+                      labelText: "password",
+                      hintText: "password",
+                      suffixIcon: Icon(Icons.remove_red_eye),
+
+
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30))
+                  ),
+
+                ),
+              ),
+              SizedBox(height: 30.0,),
+              TextButton(onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Fpassword()));
+              },
+                child: Text(
+                  "Forget password?", style: TextStyle(fontSize: 14),),),
+              SizedBox(height: 20,),
+              ElevatedButton(
+                child: Text("Login", style: TextStyle(color: Colors.white),),
+                onPressed: () {
+                  _pressLoginButton();
+                },
+                style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0)),
+                    primary: Colors.blue,
+                    fixedSize: Size(300, 50)),
+
+              ),
+
+              SizedBox(height: 30.0,),
+              Row(
+                children: [
+                  const Text('Does not have an account?',
+                    style: TextStyle(fontSize: 16),),
+                  SizedBox(width: 10,),
+                  TextButton(onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => choose()));
+                  },
+                    child: const Text(
+                      'Register Here', style: TextStyle(fontSize: 16,color: Color.fromRGBO(
+                        18, 16, 47, 1.0)),),),
+
+
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+              ),
+
+
+            ],
+
+          )
+
+      );
+    }
   }
-}
-
-class HPage {
-}

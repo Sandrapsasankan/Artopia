@@ -6,12 +6,12 @@ import 'package:helloworld/artist/Adddrop.dart';
 import 'package:helloworld/login.dart';
 import 'package:helloworld/customer/home.dart';
 
-class register extends StatefulWidget {
+class Aregister extends StatefulWidget {
   @override
-  State<register> createState() => _registerState();
+  State<Aregister> createState() => _AregisterState();
 }
 
-class _registerState extends State<register> {
+class _AregisterState extends State<Aregister> {
 
   bool _isLoading=false;
   TextEditingController userController=TextEditingController();
@@ -22,7 +22,7 @@ class _registerState extends State<register> {
   TextEditingController phnController=TextEditingController();
   TextEditingController emailController=TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  void registerUser()async {
+  void registerArtist()async {
     setState(() {
       _isLoading = true;
     });
@@ -37,8 +37,8 @@ class _registerState extends State<register> {
       "phone_number":  phnController.text,
       "email":emailController.text.trim(),
     };
-    print("Customer data${data}");
-    var res = await Api().authData(data,'/api/user_register');
+    print("Artist data${data}");
+    var res = await Api().authData(data,'/api/artist_register');
     var body = json.decode(res.body);
     print('res${res}');
     if(body['success']==true)
@@ -57,13 +57,12 @@ class _registerState extends State<register> {
         msg: body['message'].toString(),
         backgroundColor: Colors.grey,
       );
-
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    //var _obscureText;
+    var _obscureText;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -140,7 +139,7 @@ class _registerState extends State<register> {
                           }
                         },
 
-                   //     obscureText: _obscureText,
+                        obscureText: _obscureText,
                         controller: pwdController,
                         decoration: InputDecoration(
                           labelText: "Password",
@@ -149,7 +148,7 @@ class _registerState extends State<register> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
                               )),
-                        /*  suffixIcon: GestureDetector(
+                          suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
                                 _obscureText = !_obscureText;
@@ -158,7 +157,7 @@ class _registerState extends State<register> {
                             child: Icon(
                               _obscureText ? Icons.visibility_off : Icons.visibility,
                             ),
-                          ),*/
+                          ),
                         )
                     ),
 
@@ -176,7 +175,8 @@ class _registerState extends State<register> {
                           }else if (valueConPass == pwdController){
                             return null;
                           }
-                        },// obscureText: _obscureText,
+                        }, obscureText: _obscureText,
+                        controller: pwdController,
                         decoration: InputDecoration(
                           labelText: "ConfirmPassword",
                           hintText: "ConfirmPassword",
@@ -184,7 +184,7 @@ class _registerState extends State<register> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
                               )),
-                       /*   suffixIcon: GestureDetector(
+                          suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
                                 _obscureText = !_obscureText;
@@ -193,7 +193,7 @@ class _registerState extends State<register> {
                             child: Icon(
                               _obscureText ? Icons.visibility_off : Icons.visibility,
                             ),
-                          ),*/
+                          ),
                         )
                     ),
 
@@ -212,7 +212,7 @@ class _registerState extends State<register> {
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.person),
                         border: OutlineInputBorder(),
-                        labelText: 'Customername',
+                        labelText: 'Artist name',
                       ),
                     ),
                   ),
@@ -226,7 +226,7 @@ class _registerState extends State<register> {
                         }
                         return null;
                       },
-controller: addressController,
+                      controller: addressController,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.home),
                         border: OutlineInputBorder(),
@@ -244,7 +244,7 @@ controller: addressController,
                         }
                         return null;
                       },
-controller: placeController,
+                      controller: placeController,
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.place),
                         border: OutlineInputBorder(),
@@ -311,12 +311,8 @@ controller: placeController,
                         ),
                         child: const Text('Sign Up',),
                         onPressed: () {
-                          registerUser();
-                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));
+                          registerArtist();
 
-                          print(nameController.text);
-                          var passwordController;
-                          print(passwordController.text);
                         },
                       )
                   ),
@@ -331,15 +327,15 @@ controller: placeController,
                           fontSize: 18,color: Colors.pink
                       ),),
 
-                  ),
+                      ),
                     ],
 
                   ),
-              ],
+                ],
               ),
             ),
           ),
-    ),
+        ),
       ),
     );
   }
