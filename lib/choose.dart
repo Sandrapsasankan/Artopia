@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helloworld/artist/Aregister.dart';
-import 'package:helloworld/register.dart';
+import 'package:helloworld/customer/register.dart';
 class choose extends StatefulWidget {
   const choose({Key? key}) : super(key: key);
 

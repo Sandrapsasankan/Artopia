@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
-import 'package:helloworld/customer/complaintmsg.dart';
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:helloworld/customer/chatscreen.dart';
+import 'package:helloworld/customer/complaint1.dart';
+import 'package:helloworld/customer/reply.dart';
+import 'package:helloworld/customer/replycomp.dart';
 class Complaint extends StatefulWidget {
   const Complaint({Key? key}) : super(key: key);
 
@@ -15,131 +15,126 @@ class Complaint extends StatefulWidget {
 }
 
 class _ComplaintState extends State<Complaint> {
-  TextEditingController complaintController=TextEditingController();
-  DateTime datetime = DateTime.now();
-  String datetime1='';
-  late SharedPreferences prefs;
-  late int user_id;
-  bool _isLoading=false;
-  void Addcomplaint()
+  List _loaddata=[];
+  // late int id;
+  _fetchData() async {
 
-  async {
-    datetime1 = DateFormat("yyyy-MM-dd").format(datetime);
-    prefs = await SharedPreferences.getInstance();
-    user_id = (prefs.getInt('user_id')?? 0);
-    setState(() {
-      _isLoading = true;
-    });
 
-    var data = {
-      "complaint": complaintController.text.trim(),
-      "date": datetime1,
-      "user":user_id.toString(),
-    };
-
-    print(" data${data}");
-    var res = await Api().authData(data,'/api/add_complaint');
-    var body = json.decode(res.body);
-    print(body);
-    if(body['success']==true)
-    {
-
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>compmsg()));
-      Fluttertoast.showToast(
-        msg: body['message'].toString(),
-        backgroundColor: Colors.grey,
+    var res = await Api().getData('/api/artist_all_view');
+    if (res.statusCode == 200) {
+      var items = json.decode(res.body)['data'];
+      print(items);
+      setState(() {
+        _loaddata = items;
+      });
+    } else {
+      setState(() {
+        _loaddata = [];
+        Fluttertoast.showToast(
+          msg: "Currently there is no data available",
+          backgroundColor: Colors.grey,
+        );
+      }
       );
-    }
-    else
-    {
-      Fluttertoast.showToast(
-        msg: body['message'].toString(),
-        backgroundColor: Colors.grey,
-      );
-
     }
   }
-  TextEditingController dateInput = TextEditingController();
-
   @override
   void initState() {
-    dateInput.text = ""; //set the initial value of text field
+    // TODO: implement initState
     super.initState();
+    _fetchData();
   }
+
   @override
   Widget build(BuildContext context) {
-    var size=MediaQuery.of(context).size;
+
+
     return Scaffold(
 
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('Complaint'),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.blue, Colors.purple],
-            ),
-          ),
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+          // leading:
+          // IconButton( onPressed: (){
+          //   Navigator.pop(context);
+          // },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+          title: Text("Artists"),
+          // actions: [
+          //   IconButton(icon: Icon(Icons.add), onPressed: () {
+          //     //Navigator.push(context, MaterialPageRoute(builder: (context) => packageadd()));
+          //     },
+          //   )
+          //],
         ),
-      ),
 
-      body:  SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: size.height*.35,
-              child:
-              Image.asset('images/complaiiiiiint.jpeg',
-                fit: BoxFit.cover,
-              ),
-            ),
 
-            Padding(
-                padding: const EdgeInsets.only(left: 12,right: 12,top: 20),
-                child: Container(
-                    height: 350.0,
-                    child: Stack(
+        body: ListView.builder(
+
+            itemCount: _loaddata.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              int id = _loaddata[index]['id'];
+              return Card(
+                margin: const EdgeInsets.all(10),
+                child: SizedBox(
+                    width: 250,
+                    height: 100,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TextField(
-                            controller: complaintController,
-                            maxLines: 10,
-                            decoration: InputDecoration(
-                              hintText: 'Please Explain breifly about your issue',
-                              hintStyle: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.grey
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                              ),
 
+                          Padding(
+                            padding: const EdgeInsets.only(top:16,right: 12,left: 12),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+
+                                  Text(_loaddata[index]['name'],style: TextStyle(fontSize: 20),textAlign: TextAlign.justify,),
+                                ]
                             ),
                           ),
+                          SizedBox(width: 5,),
+
+                          Row(
+                            children: [
+                              Row(
+                                children:[
+
+                                  ElevatedButton(
+
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (context) => Complaint_Details(id:id)));
+                                    },
+                                    child: const Text('Complaint'),
+                                  ),
+
+
+                                  SizedBox(width: 5,),
+                                  ElevatedButton(
+
+                                    onPressed: () {
+
+
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (context) => replycomp(id:id)));
+                                    },
+                                    child: const Text('Reply'),
+                                  ),
+                                ],
+
+                              ),
+                            ],
+
+                          )
                         ]
                     )
-                )
-            ),
-
-            //
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                child: ElevatedButton(
-                  onPressed: (){
-                    Addcomplaint();
-                  },
-                  child: Text('Submit',style: TextStyle(fontSize: 19),),
-                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),shape: RoundedRectangleBorder(borderRadius:
-                  BorderRadius.circular(29.0)),primary: Colors.deepPurple),
                 ),
-              ),
+              );
+            }
+        )
 
-            )],
-        ),
-
-      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
 import 'package:helloworld/customer/chatscreen.dart';
+import 'package:helloworld/customer/reply.dart';
 class chat extends StatefulWidget {
   const chat({Key? key}) : super(key: key);
 
@@ -48,79 +49,90 @@ class _chatState extends State<chat> {
 
     return Scaffold(
 
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        centerTitle:true,
-        // leading:
-        // IconButton( onPressed: (){
-        //   Navigator.pop(context);
-        // },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
-        title: Text("Chat"),
-        // actions: [
-        //   IconButton(icon: Icon(Icons.add), onPressed: () {
-        //     //Navigator.push(context, MaterialPageRoute(builder: (context) => packageadd()));
-        //     },
-        //   )
-        //],
-      ),
-
-      body: SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: Column(
-          children: [
-            ListView.builder(
-
-                physics: NeverScrollableScrollPhysics(),
-                itemCount:_loaddata.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index)
-                {
-                  int id= _loaddata[index]['id'];
-                  return GestureDetector(
-                    onTap: () => {
-
-                    },
-                    // itemCount: 7,
-                    // itemBuilder: (context, index)
-                    //  {
-                    //    index += 1;
-                    //    return GestureDetector(
-                    //      onTap: () => {
-                    //
-                    //      },
-                    //      child: Container(
-                    //          margin: EdgeInsets.all(8),
-                    //          padding: EdgeInsets.all(4),
-                    //          decoration: BoxDecoration(),
-                    child: ListTile(
-
-                      // subtitle: Text("24/06/23"),
-                        leading: Icon(Icons.travel_explore_sharp,color: Colors.red,),
-                        title:  Text(
-                          _loaddata[index]['name'],
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        trailing: ElevatedButton(
-
-                          onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => chatscreen(id:id) ));
-                          },
-                          child:const Text('Message'),
-                        )
-                    ),
-                  );
-
-                }
-            ),
-            // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-            // floatingActionButton: FloatingActionButton(
-            //   child:  Icon(Icons.add),
-            //   backgroundColor: Colors.blue,
-            //   onPressed: () {
-            //    Navigator.push(context, MaterialPageRoute(builder: (context) => packageadd()));
-          ],
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+          // leading:
+          // IconButton( onPressed: (){
+          //   Navigator.pop(context);
+          // },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+          title: Text("Artists"),
+          // actions: [
+          //   IconButton(icon: Icon(Icons.add), onPressed: () {
+          //     //Navigator.push(context, MaterialPageRoute(builder: (context) => packageadd()));
+          //     },
+          //   )
+          //],
         ),
-      ),
+
+
+        body: ListView.builder(
+
+            itemCount: _loaddata.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              int id = _loaddata[index]['id'];
+              return Card(
+                margin: const EdgeInsets.all(10),
+                child: SizedBox(
+                    width: 250,
+                    height: 100,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+
+                          Padding(
+                            padding: const EdgeInsets.only(top:16,right: 12,left: 12),
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+
+                                  Text(_loaddata[index]['name'],style: TextStyle(fontSize: 20),textAlign: TextAlign.justify,),
+                                ]
+                            ),
+                          ),
+                          SizedBox(width: 5,),
+
+                          Row(
+                            children: [
+                              Row(
+                                children:[
+
+                                  ElevatedButton(
+
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (context) => chatscreen(id:id)));
+                                    },
+                                    child: const Text('Message'),
+                                  ),
+
+
+                                  SizedBox(width: 5,),
+                                  ElevatedButton(
+
+                                    onPressed: () {
+
+
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (context) => reply(id:id)));
+                                    },
+                                    child: const Text('Reply'),
+                                  ),
+                                ],
+
+                              ),
+                            ],
+
+                          )
+                        ]
+                    )
+                ),
+              );
+            }
+        )
+
     );
   }
 }

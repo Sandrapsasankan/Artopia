@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
 import 'package:helloworld/customer/learning2.dart';
+import 'package:helloworld/customer/video.dart';
 
 
 class learning1 extends StatefulWidget {
@@ -110,7 +111,7 @@ class _learning1State extends State<learning1> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  VideoPlayerScreen(id:id)));
+                                                  VideoPlayerScreens(id:id)));
                                     },
                                     child: Column(
                                       mainAxisAlignment:

@@ -142,8 +142,8 @@ class _AdeliveryState extends State<Adelivery> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
-                                          Text("Date : " +
-                                              _loaddata[index]['date']),
+                                          // Text("Date : " +
+                                          //     _loaddata[index]['date']),
                                           SizedBox(width: 50,),
                                           ElevatedButton(
                                             onPressed: () async {
@@ -162,7 +162,7 @@ class _AdeliveryState extends State<Adelivery> {
                                                     "0"
                                                 ? Text("Not delivered",
                                                     style: TextStyle(
-                                                        fontSize: 5,
+                                                        fontSize: 10,
                                                         color: Colors.red))
                                                 : Text("Delivered",
                                                     style: TextStyle(

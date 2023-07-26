@@ -62,7 +62,7 @@ class _AregisterState extends State<Aregister> {
 
   @override
   Widget build(BuildContext context) {
-    var _obscureText;
+  //  var _obscureText;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -139,7 +139,7 @@ class _AregisterState extends State<Aregister> {
                           }
                         },
 
-                        obscureText: _obscureText,
+                        //     obscureText: _obscureText,
                         controller: pwdController,
                         decoration: InputDecoration(
                           labelText: "Password",
@@ -148,7 +148,7 @@ class _AregisterState extends State<Aregister> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
                               )),
-                          suffixIcon: GestureDetector(
+                          /*  suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
                                 _obscureText = !_obscureText;
@@ -157,7 +157,7 @@ class _AregisterState extends State<Aregister> {
                             child: Icon(
                               _obscureText ? Icons.visibility_off : Icons.visibility,
                             ),
-                          ),
+                          ),*/
                         )
                     ),
 
@@ -175,8 +175,7 @@ class _AregisterState extends State<Aregister> {
                           }else if (valueConPass == pwdController){
                             return null;
                           }
-                        }, obscureText: _obscureText,
-                        controller: pwdController,
+                        },// obscureText: _obscureText,
                         decoration: InputDecoration(
                           labelText: "ConfirmPassword",
                           hintText: "ConfirmPassword",
@@ -184,7 +183,7 @@ class _AregisterState extends State<Aregister> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
                               )),
-                          suffixIcon: GestureDetector(
+                          /*   suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {
                                 _obscureText = !_obscureText;
@@ -193,7 +192,7 @@ class _AregisterState extends State<Aregister> {
                             child: Icon(
                               _obscureText ? Icons.visibility_off : Icons.visibility,
                             ),
-                          ),
+                          ),*/
                         )
                     ),
 
@@ -212,7 +211,7 @@ class _AregisterState extends State<Aregister> {
                       decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.person),
                         border: OutlineInputBorder(),
-                        labelText: 'Artist name',
+                        labelText: 'Customername',
                       ),
                     ),
                   ),
@@ -312,7 +311,11 @@ class _AregisterState extends State<Aregister> {
                         child: const Text('Sign Up',),
                         onPressed: () {
                           registerArtist();
+                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));
 
+                          print(nameController.text);
+                          var passwordController;
+                          print(passwordController.text);
                         },
                       )
                   ),

@@ -33,7 +33,7 @@ import 'package:helloworld/customer/myorder.dart';
 import 'package:helloworld/customer/paintingdetail.dart';
 import 'package:helloworld/customer/payment.dart';
 import 'package:helloworld/customer/product.dart';
-import 'package:helloworld/register.dart';
+import 'package:helloworld/customer/register.dart';
 import 'package:helloworld/customer/showevent.dart';
 import 'package:helloworld/splash.dart';
 import 'package:helloworld/welcome.dart';

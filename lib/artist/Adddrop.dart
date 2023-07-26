@@ -239,7 +239,13 @@ class _AaddproductsState extends State<Aaddproducts> {
             SizedBox(height: 20,),
             Container(
               padding: const EdgeInsets.all(10),
-              child: TextField(
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
                 controller: nameController,
                 decoration: const InputDecoration(
 
@@ -252,7 +258,13 @@ class _AaddproductsState extends State<Aaddproducts> {
 
             Container(
               padding: const EdgeInsets.all(10),
-              child: TextField(
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
                 controller: amountController,
                 decoration: const InputDecoration(
 
@@ -264,7 +276,13 @@ class _AaddproductsState extends State<Aaddproducts> {
             ),
             Container(
               padding: const EdgeInsets.all(10),
-              child: TextField(
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
                 controller: descController,
                 decoration: const InputDecoration(
 
@@ -276,7 +294,13 @@ class _AaddproductsState extends State<Aaddproducts> {
             ),
             Container(
               padding: const EdgeInsets.all(10),
-              child: TextField(
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
                 controller: dimensionController,
                 decoration: const InputDecoration(
 
@@ -288,7 +312,13 @@ class _AaddproductsState extends State<Aaddproducts> {
             ),
             Container(
               padding: const EdgeInsets.all(10),
-              child: TextField(
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
                 controller: colourController,
                 decoration: const InputDecoration(
 

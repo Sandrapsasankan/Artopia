@@ -112,7 +112,13 @@ class _applyState extends State<apply> {
 
               Container(
                 padding: const EdgeInsets.all(10),
-                child: TextField(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                   controller: nameController,
                   decoration: const InputDecoration(
 
@@ -123,7 +129,13 @@ class _applyState extends State<apply> {
               ),
               Container(
                 padding: const EdgeInsets.all(10),
-                child: TextField(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                   controller: addressController,
                   decoration: const InputDecoration(
 
@@ -134,7 +146,20 @@ class _applyState extends State<apply> {
               ),
               Container(
                 padding: const EdgeInsets.all(10),
-                child: TextField(
+                child: TextFormField(
+                  validator: (valueMail) {
+                    if (valueMail!.isEmpty) {
+                      return 'Please enter Email Id';
+                    }
+                    RegExp email = new RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                    if (email.hasMatch(valueMail)) {
+                      return null;
+                    } else {
+                      return 'Invalid Email Id';
+                    }
+                  },
+                  keyboardType: TextInputType.emailAddress,
                   controller: emailController,
                   decoration: const InputDecoration(
 
@@ -145,7 +170,19 @@ class _applyState extends State<apply> {
               ),
               Container(
                 padding: const EdgeInsets.all(10),
-                child: TextField(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter Mobile Number';
+                    }
+                    RegExp number = new RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
+                    if (number.hasMatch(value)) {
+                      return null;
+                    } else {
+                      return 'Invalid Mobile Number';
+                    }
+                  },
+                  keyboardType: TextInputType.number,
                   controller: phn_noController,
                   decoration: const InputDecoration(
 
@@ -156,7 +193,13 @@ class _applyState extends State<apply> {
               ),
               Container(
                 padding: const EdgeInsets.all(10),
-                child: TextField(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                   controller: qualificationController,
                   decoration: const InputDecoration(
 
@@ -167,7 +210,13 @@ class _applyState extends State<apply> {
               ),
               Container(
                 padding: const EdgeInsets.all(10),
-                child: TextField(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
                   controller: experienceController,
                   decoration: const InputDecoration(
 

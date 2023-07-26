@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
 import 'package:helloworld/customer/complaint.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Apayment extends StatefulWidget {
   Apayment({Key? key}) : super(key: key);
@@ -13,6 +14,9 @@ class Apayment extends StatefulWidget {
 class _ApaymentState extends State<Apayment> {
 
   List _loaddata=[];
+  late SharedPreferences prefs;
+  bool isLoading = false;
+  int artist=0;
   @override
   void initState() {
     // TODO: implement initState
@@ -20,8 +24,11 @@ class _ApaymentState extends State<Apayment> {
     _fetchData();
   }
   _fetchData() async {
+    prefs = await SharedPreferences.getInstance();
+    artist = prefs.getInt('user_id')?? 0;
+    print(artist);
     var res = await Api()
-        .getData('/api/payment_all_view');
+        .getData('/api/payment_Asingle_view/' + artist.toString());
     if (res.statusCode == 200) {
       var items = json.decode(res.body)['data'];
       print(items);

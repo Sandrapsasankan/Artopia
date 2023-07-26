@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,7 @@ class product3 extends StatefulWidget {
 }
 
 class _product3State extends State<product3> {
+  late int id,productid;
   bool   _isLoading = false;
   late SharedPreferences localStorage;
   TextEditingController nameController=TextEditingController();
@@ -24,6 +26,39 @@ class _product3State extends State<product3> {
 
 
   String name='',amount='',description='',dimension='',colour='',image='';
+  Future AddCart(int productid) async {
+    var prefs = await SharedPreferences.getInstance();
+    id = (prefs.getInt('user_id') ?? 0);
+    print('id ${id}');
+    setState(() {
+      _isLoading = true;
+    });
+
+    var data = {
+      "user": id.toString(),
+      "product": productid.toString(),
+      "quantity": "1",
+      "artist": id.toString(),
+    };
+//   print(data);
+    var res = await Api().authData(data, '/api/add_cart');
+    var body = json.decode(res.body);
+    print(body);
+    if (body['success'] == true) {
+      //   print(body);
+      Fluttertoast.showToast(
+        msg: body['message'].toString(),
+        backgroundColor: Colors.grey,
+      );
+
+      //   Navigator.push(context as BuildContext, MaterialPageRoute(builder: (context)=>View_Comp()));
+    } else {
+      Fluttertoast.showToast(
+        msg: body['message'].toString(),
+        backgroundColor: Colors.grey,
+      );
+    }
+  }
 
   Future<void> _viewPro() async {
     int id = widget.id;
@@ -185,27 +220,31 @@ class _product3State extends State<product3> {
                   fontSize: 16.0,
                   color: Colors.black,)
             ),
-            SizedBox(height: 50.0),
-            Center(
-                child: Container(
-                    width: MediaQuery.of(context).size.width - 50.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: Colors.deepPurple
-                    ),
+            SizedBox(width: 10.0),
+           Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                color: Colors.deepPurple,
+                child: InkWell(
+                  onTap: () {
+                    AddCart(productid);
+                  },
+                  child: const SizedBox(
+                    height: kToolbarHeight,
+                    width: double.infinity,
                     child: Center(
-                        child: Text('Add to cart',
-                          style: TextStyle(
-                              fontFamily: 'Varela',
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                          ),
-                        )
-                    )
-                )
-            )
+                      child: Text(
+                        ' Add to Cart',
+                        style: TextStyle(fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ]
       ),
 

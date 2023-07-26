@@ -10,7 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../register.dart';
+import '../customer/register.dart';
 
 class Aeventpage extends StatefulWidget {
   @override
@@ -231,21 +231,35 @@ class _AeventpageState extends State<Aeventpage> {
 
                     Container(
                       padding: const EdgeInsets.all(10),
-                      child: TextField(
-                        controller: nameController,
-                        decoration: const InputDecoration(
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                          controller: nameController,
+                          decoration: const InputDecoration(
 
-                          border: OutlineInputBorder(),
-                          labelText: 'Event Name',
-                          hintText: 'Event Name'
-                        ),
+                            border: OutlineInputBorder(),
+                            labelText: 'Event Name',
+                            hintText: 'Event Name'
+                          ),
+
                       ),
                     ),
 
                       Container(
                         padding: const EdgeInsets.all(10),
-                        child: TextField(
+                        child: TextFormField(
+
                           maxLines: 5,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
                           controller: descController,
                           decoration: const InputDecoration(
                               border: OutlineInputBorder(),
@@ -257,7 +271,13 @@ class _AeventpageState extends State<Aeventpage> {
                     ),
                     Container(
                       padding: const EdgeInsets.all(10),
-                      child: TextField(
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
                         controller: placeController,
                         decoration: const InputDecoration(
 
@@ -299,7 +319,13 @@ class _AeventpageState extends State<Aeventpage> {
                     ),
                     Container(
                       padding: const EdgeInsets.all(10),
-                      child: TextField(
+                      child:TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
                         controller: timeController,
                         decoration: const InputDecoration(
 

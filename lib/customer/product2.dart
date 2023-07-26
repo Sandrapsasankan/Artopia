@@ -135,6 +135,7 @@ class _categoryState extends State<category> {
                   MaterialPageRoute(builder: (context) => product3(id: id)));
             },
             child: Container(
+
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     boxShadow: [

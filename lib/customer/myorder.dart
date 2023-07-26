@@ -22,11 +22,8 @@ class _ordersState extends State<orders> {
   List _loaddata = [];
   late SharedPreferences prefs;
   bool isLoading = false;
-
-
-
-
-
+  late String Statusdata = "not delivered";
+  late String orderstts = "";
 
 
   _fetchOrder() async {
@@ -52,38 +49,33 @@ class _ordersState extends State<orders> {
         backgroundColor: Colors.grey,
       );
     }
-    /*prefs = await SharedPreferences.getInstance();
-    int? userid = prefs.getInt('user_id');
-    print(userid);
-    // print('c_id ${Category}');
-    var res = await Api().getData('api/order_all_view/');
-    print(json.decode(res.body));
-    print('success');
 
-    // late int id = widget.id;
-
-
-
-    if (res.statusCode == 200) {
-      var body = json.decode(res.body);
-
-      var items = json.decode(res.body)['data'];
-      print("order Items${items}");
-      setState(() {
-        print('hello');
-        order = items;
-
-
-      });
-    } else {
-      order = [];
-      Fluttertoast.showToast(
-        msg:"Currently there is no data available",
-        backgroundColor: Colors.grey,
-      );
-    }*/
   }
 
+
+  _approveData(int id, String orderstts) async {
+    print("items${id}");
+    var res = await Api().postData('/api/order_status/' + id.toString());
+
+    print("resssssss${json.decode(res.body)}");
+
+    if (res.statusCode == 200) {
+      //var items = json.decode(res.body);
+      //print("resssssss${items.data}");
+
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => cartitemsample()));
+      Fluttertoast.showToast(
+        msg: "status updated succesfully",
+        backgroundColor: Colors.grey,
+      );
+    } else {
+      // cart = [];
+      Fluttertoast.showToast(
+        msg: "Currently there is no data available",
+        backgroundColor: Colors.grey,
+      );
+    }
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -93,6 +85,12 @@ class _ordersState extends State<orders> {
     _fetchOrder();
   }
 
+
+  String extractFirstThreeWords(String sentence) {
+    RegExp regex = RegExp(r'^(\w+\s){0,2}\w+');
+    Match match = regex.firstMatch(sentence) as Match;
+    return match?.group(0) ?? '';
+  }
 
 
 
@@ -117,7 +115,7 @@ class _ordersState extends State<orders> {
         body:
 
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: ListView.builder(
 
               shrinkWrap: true,
@@ -126,10 +124,10 @@ class _ordersState extends State<orders> {
                 int id=_loaddata[index]['id'];
 
                 return Card(
-                    margin: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.only(top: 8.0),
                 child: SizedBox(
 width: 250,
-                height: 100,
+                height: 140,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -142,15 +140,41 @@ width: 250,
 
                             child: Image(image: NetworkImage(Api().url+ _loaddata[index]['image'])),
                           ),
-                          SizedBox(width: 20,),
+
                           Column(
                             children: [
                               SizedBox(height: 20,),
-                              Text(_loaddata[index]['product_name'].toString(),),
+                              Text(_loaddata[index]['product_name'].toString(),style: TextStyle(fontSize: 13)),
                               SizedBox(height: 8,),
 
-                              Text("delivered on: "+_loaddata[index]['date'].toString(),style: TextStyle(fontSize: 10)),
+                              Text("Expected on : "+_loaddata[index]['expday'].toString(),style: TextStyle(fontSize: 10)),
                               SizedBox(height: 8,),
+
+                              ElevatedButton(
+                                onPressed: () async {
+                                  await _approveData(
+                                      _loaddata[index]['id'],
+                                      orderstts);
+                                  print('completed');
+                                  _fetchOrder();
+                                  setState(() {});
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                ),
+                                child: _loaddata[index]
+                                ['order_status'] ==
+                                    "0"
+                                    ? Text("Not delivered",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.red))
+                                    : Text("Delivered",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.green)),
+                              )
+
                             ],
                           ),
                         ],

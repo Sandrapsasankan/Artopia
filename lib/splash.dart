@@ -69,10 +69,11 @@ startTime() async {
 Widget build(BuildContext context) {
 
   return Scaffold(
+
     body: Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/bulb.jpg"),
+          image: AssetImage('images/img_3.png'),
           fit: BoxFit.cover,
         ),
       ),

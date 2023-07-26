@@ -1,112 +1,146 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
-import 'package:helloworld/customer/complaint.dart';
+import 'package:helloworld/artist/Achatscreen.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Acomplaint extends StatefulWidget {
-  Acomplaint({Key? key}) : super(key: key);
+  const Acomplaint({Key? key}) : super(key: key);
+
   @override
   State<Acomplaint> createState() => _AcomplaintState();
 }
+
 class _AcomplaintState extends State<Acomplaint> {
 
+  bool isObscurePassword=true;
+  late int user_id;
+  String u_name="";
+  String complaint="";
+  late SharedPreferences prefs;
+  TextEditingController u_nameController=TextEditingController();
+  TextEditingController complaintController=TextEditingController();
   List _loaddata=[];
+
+
   @override
+
   void initState() {
     // TODO: implement initState
     super.initState();
+    // _viewPro();
     _fetchData();
   }
+  int currentTab = 2;
+  // Future<void> _viewPro() async {
+  //   prefs = await SharedPreferences.getInstance();
+  //   user_id = (prefs.getInt('user_id') ?? 0 );
+  //   print('${user_id }');
+  //   var res = await Api().getData('/api/chat_single_view/'+user_id.toString());
+  //
+  //   var body = json.decode(res.body);
+  //   // var body = json.decode(res.body);
+  //   print(body);
+  //
+  //
+  //   setState(() {
+  //     u_name = body['data']['u_name'];
+  //     message = body['data']['message'];
+  //
+  //     u_nameController.text = u_name;
+  //     messageController.text=message;
+  //
+  //   });
+  // }
   _fetchData() async {
+    prefs = await SharedPreferences.getInstance();
+    user_id = prefs.getInt('user_id')!;
+    print(user_id);
     var res = await Api()
-        .getData('/api/complaint_all_view');
+        .getData('/api/complaint_single_view/' +user_id.toString());
     if (res.statusCode == 200) {
       var items = json.decode(res.body)['data'];
       print(items);
       setState(() {
         _loaddata = items;
-
       });
     } else {
       setState(() {
-        _loaddata =[];
+        _loaddata = [];
         Fluttertoast.showToast(
-          msg:"Currently there is no data available",
+          msg: "Currently there is no data available",
           backgroundColor: Colors.grey,
         );
-      });
+      }
+      );
     }
   }
-
   @override
+
+
   Widget build(BuildContext context) {
+
+
     return Scaffold(
+
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('Complaint_Details',),
-
+        backgroundColor: Colors.blue,
+        centerTitle:true,
+        // leading:
+        // IconButton( onPressed: (){
+        //   Navigator.pop(context);
+        // },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+        title: Text("Customer Messages"),
       ),
 
-      body: ListView.builder(
-        shrinkWrap: true,
-        itemCount: _loaddata.length,
-        itemBuilder: (context,index){
+      body: SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Column(
+          children: [
+            ListView.builder(
 
-          return Padding(
-            padding: const EdgeInsets.only(top: 16,right: 12,left: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: Icon(Icons.notifications_outlined,color: Colors.green,size: 36,),
+                physics: NeverScrollableScrollPhysics(),
+                itemCount:_loaddata.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index)
+                {
+                  int id= _loaddata[index]['id'];
+                  return GestureDetector(
+                    onTap: () => {
+
+                    },
+                    //
+                    child: ListTile(
+
+                      // subtitle: Text("24/06/23"),
+                        leading: Icon(Icons.message,color: Colors.red,),
+                        title:  Text(
+                          _loaddata[index]['u_name'],
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(_loaddata[index]['complaint']),
+                        trailing: ElevatedButton(
+
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Achat2(id:id) ));
+                          },
+                          child:const Text('Reply'),
+                        )
                     ),
-                    SizedBox(width: 16,),
-                    Expanded(
-                      flex: 6,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                  );
 
-                          Text(_loaddata[index]['complaint'],style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,),
-
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 14,),
-
-                    Text(_loaddata[index]['date'],style: TextStyle(fontSize: 15))
-                  ],
-                ),
-                SizedBox(height: 12,),
-                Divider(
-                  color: Colors.grey[300],
-                  thickness: 2,
-                )
-              ],
+                }
             ),
-          );
-        },
 
-
+          ],
+        ),
       ),
-
-
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Complaint(),));
-
-        },
-        label: const Text('New'),
-        icon: const Icon(Icons.add),
-        backgroundColor: Colors.green,
-      ),
-
     );
   }
 }
+

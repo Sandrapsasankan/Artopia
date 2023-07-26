@@ -288,7 +288,7 @@ class _alearningState extends State<alearning> {
                     },
                   ),
                   SizedBox(height: 30,),
-                  Text(filePath.toString()),
+                  Text(filePath== null?"":filePath.toString()),
                   SizedBox(height: 30,),
                   Container(
                       height: 50,

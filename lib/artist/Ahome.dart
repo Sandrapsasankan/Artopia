@@ -322,41 +322,41 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Aevent()));
                         ),
                       ),
 
-                      Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(0,17),
-                                  blurRadius: 17,
-                                  spreadRadius: -23
-                              )
-                            ]
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Adelivery()));
-                            },
-                            child: Column(
-                              children: [
-
-                                new Image.asset('images/video.png',
-                                  height: 90,
-                                  width: 150,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(height: 10,),
-                                Text('Delivery',textAlign: TextAlign.center,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),)
-
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //   padding: EdgeInsets.all(20),
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.white,
+                      //       borderRadius: BorderRadius.circular(15),
+                      //       boxShadow: [
+                      //         BoxShadow(
+                      //             offset: Offset(0,17),
+                      //             blurRadius: 17,
+                      //             spreadRadius: -23
+                      //         )
+                      //       ]
+                      //   ),
+                      //   child: Material(
+                      //     color: Colors.transparent,
+                      //     child: InkWell(
+                      //       onTap: () {
+                      //           Navigator.push(context, MaterialPageRoute(builder: (context) => Adelivery()));
+                      //       },
+                      //       child: Column(
+                      //         children: [
+                      //
+                      //           new Image.asset('images/video.png',
+                      //             height: 90,
+                      //             width: 150,
+                      //             alignment: Alignment.center,
+                      //           ),
+                      //           SizedBox(height: 10,),
+                      //           Text('Delivery',textAlign: TextAlign.center,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),)
+                      //
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
 
                     ],
                   ),

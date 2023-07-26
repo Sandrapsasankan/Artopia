@@ -7,7 +7,7 @@ import 'package:helloworld/api_service/api.dart';
 import 'package:helloworld/choose.dart';
 import 'package:helloworld/customer/forget.dart';
 import 'package:helloworld/customer/home.dart';
-import 'package:helloworld/register.dart';
+import 'package:helloworld/customer/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -17,6 +17,13 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  bool _obscureText = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
   late SharedPreferences localStorage;
   String role = "";
   String status = "";
@@ -52,16 +59,6 @@ class _loginState extends State<login> {
       print('login_id ${body['data']['login_id']}');
       print('user_id ${body['data']['user_id']}');
 
-      //      if (user == role.replaceAll('"', '') &&
-      //      storedvalue == status.replaceAll('"', '')) {
-      //    Navigator.push(
-      //        context, MaterialPageRoute(builder: (context) => MyHomePage()));
-      //  } else if (doctor == role.replaceAll('"', '') &&
-      //      storedvalue == status.replaceAll('"', '')) {
-      //    Navigator.of(context).push(MaterialPageRoute(
-      //      builder: (context) => DoctHome(),
-      //    ));
-      // }
 
       if (user == role &&
           storedvalue == status) {
@@ -81,11 +78,6 @@ class _loginState extends State<login> {
       }
     }
 
-    //  else {
-    //   Fluttertoast.showToast(
-    //     msg: body['message'].toString(),
-    //     backgroundColor: Colors.grey,
-    //   );
     }
 
     @override
@@ -118,10 +110,7 @@ class _loginState extends State<login> {
                     hintText: "username",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30)),
-
                   ),
-
-
                 ),
               ), SizedBox(height: 20),
 
@@ -129,17 +118,18 @@ class _loginState extends State<login> {
                 padding: const EdgeInsets.all(8),
                 child: TextField(
                   controller: pwdController,
-                  obscureText: true,
+                  obscureText: _obscureText,
                   decoration: InputDecoration(
-
-                      prefixIcon: Icon(Icons.lock),
-                      labelText: "password",
-                      hintText: "password",
-                      suffixIcon: Icon(Icons.remove_red_eye),
-
-
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30))
+                    prefixIcon: Icon(Icons.lock),
+                    labelText: 'Password',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: _togglePasswordVisibility,
+                    ),
                   ),
 
                 ),

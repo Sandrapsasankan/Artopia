@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
 import 'package:helloworld/artist/Alearning3.dart';
 import 'package:helloworld/customer/learning2.dart';
+import 'package:helloworld/customer/video.dart';
 
 
 
@@ -103,7 +104,7 @@ class _Alearning1State extends State<Alearning1> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      VideoPlayerScreen(id: id)));
+                                                      VideoPlayerScreens(id: id)));
                                         },
                                         child: Column(
                                           mainAxisAlignment:
