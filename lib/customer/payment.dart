@@ -12,9 +12,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Payment extends StatefulWidget {
   final String price;
+  final int artist_id;
 
 
-  Payment({required this.price});
+  Payment({required this.price,required this.artist_id});
 
   @override
   State<Payment> createState() => _PaymentState();
@@ -68,6 +69,7 @@ class _PaymentState extends State<Payment> {
     var data = {
       "user": user_id.toString(),
       "amount": amount,
+      "artist":widget.artist_id.toString(),
       "date":formattedDate
     };
     print(data);

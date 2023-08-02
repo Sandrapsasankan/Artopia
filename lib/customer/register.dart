@@ -71,11 +71,12 @@ class _registerState extends State<register> {
         title: Text("Register"),
 
         flexibleSpace: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[ Color(0xFFe0e0e0), Color(0xFFe0e0e0), ]),
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
           ),
         ),
         leading:
@@ -86,8 +87,8 @@ class _registerState extends State<register> {
       body: SingleChildScrollView(
         child: DecoratedBox(
           decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/bg.png"), fit: BoxFit.cover),
+            // image: DecorationImage(
+            //     image: AssetImage("images/background artopia.jpeg"), fit: BoxFit.cover),
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -98,8 +99,8 @@ class _registerState extends State<register> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text ("Sign up", style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,color: Colors.pink,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,color: Colors.black,
                   ),),
                   SizedBox(height: 20,),
                   Text("Create an Account,Its free",style: TextStyle(
@@ -143,22 +144,14 @@ class _registerState extends State<register> {
                    //     obscureText: _obscureText,
                         controller: pwdController,
                         decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
                           labelText: "Password",
                           hintText: "Password",
                           hintStyle: TextStyle(color: Colors.red),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
                               )),
-                        /*  suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
-                            },
-                            child: Icon(
-                              _obscureText ? Icons.visibility_off : Icons.visibility,
-                            ),
-                          ),*/
+
                         )
                     ),
 
@@ -178,6 +171,7 @@ class _registerState extends State<register> {
                           }
                         },// obscureText: _obscureText,
                         decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
                           labelText: "ConfirmPassword",
                           hintText: "ConfirmPassword",
                           hintStyle: TextStyle(color: Colors.red),
@@ -306,7 +300,7 @@ controller: placeController,
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: ElevatedButton(
                         style:  ElevatedButton.styleFrom(
-                          backgroundColor: Colors.pink, // background (button) color
+                          backgroundColor: Colors.deepPurple, // background (button) color
                           // foreground (text) color
                         ),
                         child: const Text('Sign Up',),
@@ -320,15 +314,15 @@ controller: placeController,
                         },
                       )
                   ),
-                  SizedBox(height: 20,),
+                 SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Already have an account? "),TextButton(onPressed: (){
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));
                       }, child: Text("Login",style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 18,color: Colors.pink
+                          fontSize: 18,color: Colors.deepPurple
                       ),),
 
                   ),

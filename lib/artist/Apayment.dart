@@ -51,7 +51,15 @@ class _ApaymentState extends State<Apayment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
         title: Text('Payment_Details',),
 
       ),

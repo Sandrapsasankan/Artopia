@@ -38,24 +38,7 @@ class _HomescreenState extends State<Homescreen> {
               physics: ScrollPhysics(),
               child: Column(
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: MediaQuery.of(context).size.width,
-                    decoration:BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: Colors.grey[300],
-                    ),
-
-                    child: TextField(
-                      controller: searchController,
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          hintText: "Search",
-                          border: InputBorder.none
-                      ),
-                    ),
-                  ),
+                 SizedBox(height: 50,),
 
                   GridView.count(
                     shrinkWrap: true,

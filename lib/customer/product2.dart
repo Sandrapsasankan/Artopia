@@ -83,20 +83,42 @@ class _categoryState extends State<category> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
+    /*24 is for notification bar on Android*/
+    final double itemHeight = (size.height - kToolbarHeight - 200) / 2;
+    final double itemWidth = size.width / 2;
+
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Products"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+      ),
       backgroundColor: Color(0xFFFCFAF8),
       body: ListView(
         children: <Widget>[
           SizedBox(height: 15.0),
           Container(
-            padding: EdgeInsets.only(right: 15.0),
+            padding: EdgeInsets.only(right: 8.0,left: 8.0),
             width: MediaQuery.of(context).size.width - 30.0,
             height: MediaQuery.of(context).size.height - 30.0,
             child: GridView.builder(
               itemCount: _loaddata.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 4.0,
+                  childAspectRatio: (itemWidth / itemHeight),
                   mainAxisSpacing: 4.0),
               itemBuilder: (context, index) {
                 productid=_loaddata[index]['id'];
@@ -120,63 +142,80 @@ class _categoryState extends State<category> {
   }
 
   Widget _buildCard(
-    int id,
-    String name,
-    String price,
-    String imgPath,
-    /*bool added,
-      bool isFavorite, context*/
-  ) {
+      int id,
+      String name,
+      String price,
+      String imgPath,
+      ) {
     return Padding(
-        padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
-        child: InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => product3(id: id)));
-            },
-            child: Container(
-
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 3.0,
-                          blurRadius: 5.0)
-                    ],
-                    color: Colors.white),
-                child: Column(children: [
-                  Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-
-                                  AddCart(productid);
-                                },
-                                icon: Icon(Icons.shopping_cart))
-                          ])),
-                  Hero(
-                      tag: imgPath,
-                      child: Container(
-                        height: 60.0,
-                        width: 120.0,
-                        child: Image.network(Api().url + imgPath),
-                      )),
-                  SizedBox(height: 6.0),
-                  Text(price,
-                      style: TextStyle(
-                          color: Color(0xFFCC8053),
-                          fontFamily: 'Varela',
-                          fontSize: 14.0)),
-                  Text(name,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Color(0xFF575E67),
-                          fontFamily: 'Varela',
-                          fontSize: 14.0)),
-                ]))));
+      padding: EdgeInsets.all(5.0),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => product3(id: id)),
+          );
+        },
+        child: Container(
+          height: 300, // Adjust the height of the card as desired
+          width: 180, // Adjust the width of the card as desired
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 3.0,
+                blurRadius: 5.0,
+              )
+            ],
+            color: Colors.white,
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        AddCart(id);
+                      },
+                      icon: Icon(Icons.shopping_cart),
+                    ),
+                  ],
+                ),
+              ),
+              Hero(
+                tag: imgPath,
+                child: Container(
+                  height: 120.0, // Adjust the height of the image as desired
+                  width: 180.0, // Adjust the width of the image as desired
+                  child: Image.network(Api().url + imgPath),
+                ),
+              ),
+              SizedBox(height: 6.0),
+              Text(
+                price,
+                style: TextStyle(
+                  color: Color(0xFFCC8053),
+                  fontFamily: 'Varela',
+                  fontSize: 16.0, // Adjust the font size of the price as desired
+                ),
+              ),
+              Text(
+                name,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: Color(0xFF575E67),
+                  fontFamily: 'Varela',
+                  fontSize: 14.0, // Adjust the font size of the name as desired
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

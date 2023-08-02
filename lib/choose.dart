@@ -28,8 +28,6 @@ class _chooseState extends State<choose> {
   }
 }
 
-
-
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({super.key});
 
@@ -40,31 +38,86 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style =
-    ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+
 
     return Center(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => register()));
-            },
-            child: const Text('User'),
+        children: [
+SizedBox(height: 70,),
+          Container(
+            height: 220,
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+          BoxShadow(
+          offset: Offset(0,17),
+          blurRadius: 17,
+          spreadRadius: -23
+          )
+          ]
           ),
-          const SizedBox(height: 30),
-          ElevatedButton(
-            style: style,
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Aregister()));
-            },
-            child: const Text('Artist'),
+          child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+          onTap: () {
+   Navigator.push(context, MaterialPageRoute(builder: (context) =>register()));
+          },
+          child: Column(
+          children: [
+          new Image.asset('images/events.jpeg',
+          height: 90,
+          width: 150,
+          alignment: Alignment.center,
           ),
+          SizedBox(height: 50,),
+          Text('USER',textAlign: TextAlign.center,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
+
+          ],
+          ),
+          ),
+          ),
+          ),
+                SizedBox(height: 60,),
+                Container(
+                  height: 220,
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0,17),
+                            blurRadius: 17,
+                            spreadRadius: -23
+                        )
+                      ]
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>Aregister()));
+                      },
+                      child: Column(
+                        children: [
+                          new Image.asset('images/events.jpeg',
+                            height: 90,
+                            width: 150,
+                            alignment: Alignment.center,
+                          ),
+                          SizedBox(height: 50,),
+                          Text('ARTIST',textAlign: TextAlign.center,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
 
         ],
       ),
     );
-  }
+    }
 }

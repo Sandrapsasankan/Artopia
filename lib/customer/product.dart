@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage>
             )),
       ),
       body: ListView.builder(
-          scrollDirection: Axis.horizontal,
+
           itemCount: _loaddata.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {

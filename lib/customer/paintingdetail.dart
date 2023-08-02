@@ -134,78 +134,78 @@ class _product3State extends State<product3> {
             ),
            // SizedBox(height: 16,),
             Container(
-              height: 170,
-              width: 200,
+              height: 200,
+              width: 250,
               child: Image(image: NetworkImage(Api().url+image)),
             ),
 
            // SizedBox(height: 20.0),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text("Amount :     Rs.", style: TextStyle(
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0,right: 8.0,top: 20.0),
+              child: Row(
+                children: [
+                  Text("Amount :     Rs.", style: TextStyle(
                     fontFamily: 'Varela',
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,)),
-                ),
 
-                Text(amount,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Varela',
-                      fontSize: 16.0,
-                      color: Colors.black,)
-                ),
-              ],
+                  Text(amount,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Varela',
+                        fontSize: 16.0,
+                        color: Colors.black,)
+                  ),
+                ],
+              ),
             ),
 
            // SizedBox(height: 20.0),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text("Dimension :", style: TextStyle(
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0,right: 8.0,top: 20.0),
+              child: Row(
+                children: [
+                  Text("Dimension :", style: TextStyle(
                     fontFamily: 'Varela',
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,)),
-                ),
-                SizedBox(width: 10.0),
-                Text(dimension,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Varela',
-                      fontSize: 16.0,
-                      color: Colors.black,)
-                ),
-              ],
-            ),
-            SizedBox(height: 20.0),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text("Colour :", style: TextStyle(
-                    fontFamily: 'Varela',
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,)),
-                ),
-                SizedBox(width: 10.0),
-                Text(colour,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Varela',
-                      fontSize: 16.0,
-                      color: Colors.black,)
-                ),
-              ],
+                  SizedBox(width: 10.0),
+                  Text(dimension,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Varela',
+                        fontSize: 16.0,
+                        color: Colors.black,)
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 20.0),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(left: 18.0,right: 8.0,top: 8.0),
+              child: Row(
+                children: [
+                  Text("Colour :", style: TextStyle(
+                    fontFamily: 'Varela',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,)),
+                  SizedBox(width: 10.0),
+                  Text(colour,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Varela',
+                        fontSize: 16.0,
+                        color: Colors.black,)
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0,right: 8.0,top: 20.0),
               child: Text("Description :", style: TextStyle(
                 fontFamily: 'Varela',
                 fontSize: 16.0,
@@ -220,31 +220,31 @@ class _product3State extends State<product3> {
                   fontSize: 16.0,
                   color: Colors.black,)
             ),
-            SizedBox(width: 10.0),
+            SizedBox(height: 100.0),
            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Material(
-                color: Colors.deepPurple,
-                child: InkWell(
-                  onTap: () {
-                    AddCart(productid);
-                  },
-                  child: const SizedBox(
-                    height: kToolbarHeight,
-                    width: double.infinity,
-                    child: Center(
-                      child: Text(
-                        ' Add to Cart',
-                        style: TextStyle(fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+             padding: const EdgeInsets.all(8.0),
+             child: Material(
+               color: Colors.deepPurple,
+               child: InkWell(
+                 onTap: () {
+                   AddCart(productid);
+                 },
+                 child: const SizedBox(
+                   height: kToolbarHeight,
+                   width: double.infinity,
+                   child: Center(
+                     child: Text(
+                       ' Add to Cart',
+                       style: TextStyle(fontSize: 18,
+                         color: Colors.white,
+                         fontWeight: FontWeight.bold,
+                       ),
+                     ),
+                   ),
+                 ),
+               ),
+             ),
+           ),
           ]
       ),
 

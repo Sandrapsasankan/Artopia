@@ -18,7 +18,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
 
   bool isLoading = false;
   late SharedPreferences localStorage;
-  late int user_id;
+  late int user_id,artist;
   String price='';
   bool _isLoading=false;
 
@@ -102,6 +102,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
           itemBuilder: (BuildContext context, int index){
             int id=order[index]['id'];
             final firstWord = order[index]['name'];
+            artist= order[index]['artist_id'];
             return Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -165,7 +166,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
               color: Colors.green,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Payment(price: price,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Payment(price: price,artist_id:artist)));
                 },
                 child: const SizedBox(
                   height: kToolbarHeight,
