@@ -84,6 +84,15 @@ class _PlaceOrderState extends State<PlaceOrder> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Orders'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
         leading: IconButton(
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>Homescreen()));
@@ -120,7 +129,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Text(firstWord),
+                                Text(order[index]['product_name'].toString()),
                                 Text("Quantity : "+order[index]['quantity'].toString()),
                                 Text("Rs : "+order[index]['total_price'].toString()),
                                 // Text("Qty : "+order[index].quantity),
@@ -148,7 +157,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
       bottomNavigationBar: Row(
         children: [
           Material(
-            color:  Color(0xffff8989),
+            color:  Colors.deepPurple[100],
             child:  SizedBox(
               height: kToolbarHeight,
               width: 100,
@@ -163,7 +172,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
           ),
           Expanded(
             child: Material(
-              color: Colors.green,
+              color: Colors.deepPurple[400],
               child: InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Payment(price: price,artist_id:artist)));

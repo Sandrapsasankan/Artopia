@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class Achat2 extends StatefulWidget {
   final int id;
-  const Achat2({required this.id});
+   Achat2({required this.id});
 
   @override
   State<Achat2> createState() => _Achat2State();
@@ -27,15 +27,12 @@ class _Achat2State extends State<Achat2> {
 
   Future<void> _updatereply(String reply) async {
 
-
-
-
     prefs = await SharedPreferences.getInstance();
-    int id = widget.id;
+   id = widget.id;
 
     //id = (prefs.getInt('user_id') ?? 0 );
-    // print(id);
-    var uri = Uri.parse(Api().url+'/api/complaint_update/'+id.toString()); // Replace with your API endpoint
+    print("cmp${id}");
+    var uri = Uri.parse(Api().url+'/api/complaint_update/'+widget.id.toString()); // Replace with your API endpoint
     var request = http.MultipartRequest('PUT', uri);
     request.fields['reply'] = reply;
 
@@ -61,19 +58,34 @@ class _Achat2State extends State<Achat2> {
     return Scaffold(
 
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
         title: Text('Messaging'),
       ),
 
       body:  SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: size.height*.35,
-              child:
-              Image.asset('images/message.jpg',
-                fit: BoxFit.cover,
+            SizedBox(height: 20,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: size.height*.35,
+                child:
+                Image.asset('images/complaint123.jpeg',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Padding(
@@ -111,7 +123,8 @@ class _Achat2State extends State<Achat2> {
                     _updatereply(replyController.text);
                   },
                   child: Text('Reply',style: TextStyle(fontSize: 19),),
-                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(29.0)),primary: Colors.blue),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),shape: RoundedRectangleBorder(borderRadius:
+                  BorderRadius.circular(29.0)),primary: Colors.deepPurple),
                 ),
               ),
 

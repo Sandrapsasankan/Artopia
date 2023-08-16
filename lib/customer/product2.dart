@@ -108,8 +108,9 @@ class _categoryState extends State<category> {
       ),
       backgroundColor: Color(0xFFFCFAF8),
       body: ListView(
+        shrinkWrap: true,
         children: <Widget>[
-          SizedBox(height: 15.0),
+          SizedBox(height: 10.0),
           Container(
             padding: EdgeInsets.only(right: 8.0,left: 8.0),
             width: MediaQuery.of(context).size.width - 30.0,
@@ -189,18 +190,21 @@ class _categoryState extends State<category> {
               Hero(
                 tag: imgPath,
                 child: Container(
-                  height: 120.0, // Adjust the height of the image as desired
-                  width: 180.0, // Adjust the width of the image as desired
+                  height: 140.0, // Adjust the height of the image as desired
+                  width: 200.0, // Adjust the width of the image as desired
                   child: Image.network(Api().url + imgPath),
                 ),
               ),
               SizedBox(height: 6.0),
-              Text(
-                price,
-                style: TextStyle(
-                  color: Color(0xFFCC8053),
-                  fontFamily: 'Varela',
-                  fontSize: 16.0, // Adjust the font size of the price as desired
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  price,
+                  style: TextStyle(
+                    color: Color(0xFFCC8053),
+                    fontFamily: 'Varela',
+                    fontSize: 16.0, // Adjust the font size of the price as desired
+                  ),
                 ),
               ),
               Text(

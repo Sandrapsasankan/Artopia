@@ -56,6 +56,10 @@ class _feedbackState extends State<feedback> {
         ),
         title: Text('Feedback',),
 
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
       ),
 
       body: ListView.builder(

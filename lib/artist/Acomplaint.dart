@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
-import 'package:helloworld/artist/Achatscreen.dart';
+import 'package:helloworld/artist/Acomplaint1.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -89,13 +89,20 @@ class _AcomplaintState extends State<Acomplaint> {
     return Scaffold(
 
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        centerTitle:true,
-        // leading:
-        // IconButton( onPressed: (){
-        //   Navigator.pop(context);
-        // },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
-        title: Text("Customer Messages"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+        title: Text("Customer Complaint"),
       ),
 
       body: SingleChildScrollView(
@@ -110,27 +117,48 @@ class _AcomplaintState extends State<Acomplaint> {
                 itemBuilder: (context, index)
                 {
                   int id= _loaddata[index]['id'];
-                  return GestureDetector(
-                    onTap: () => {
+                  return Container(
+                    height: 100,
+                    child: Card(
 
-                    },
-                    //
-                    child: ListTile(
+                      child: GestureDetector(
+                        onTap: () => {
 
-                      // subtitle: Text("24/06/23"),
-                        leading: Icon(Icons.message,color: Colors.red,),
-                        title:  Text(
-                          _loaddata[index]['u_name'],
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        },
+                        //
+                        child: ListTile(
+
+                          // subtitle: Text("24/06/23"),
+                            leading: Icon(Icons.message,color: Colors.deepPurple,),
+                            title:  Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                _loaddata[index]['u_name'],
+                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 27),
+                              ),
+                            ),
+                            subtitle: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+
+                                children: [
+
+                                  Text(_loaddata[index]['complaint']),
+                                  Text(_loaddata[index]['date']),
+                                ],
+                              ),
+                            ),
+                            trailing: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.deepPurple,
+                              ),
+                              onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Achat2(id:id) ));
+                              },
+                              child:const Text('Reply'),
+                            )
                         ),
-                        subtitle: Text(_loaddata[index]['complaint']),
-                        trailing: ElevatedButton(
-
-                          onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Achat2(id:id) ));
-                          },
-                          child:const Text('Reply'),
-                        )
+                      ),
                     ),
                   );
 

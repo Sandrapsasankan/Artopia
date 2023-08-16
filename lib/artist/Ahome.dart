@@ -1,4 +1,5 @@
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:helloworld/artist/Achat.dart';
 import 'package:helloworld/artist/Acomplaint.dart';
@@ -37,6 +38,7 @@ class _AhomeState extends State<Ahome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Container(
           child:Padding(
             padding:const EdgeInsets.all(20),
@@ -45,25 +47,20 @@ class _AhomeState extends State<Ahome> {
               physics: ScrollPhysics(),
               child: Column(
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: MediaQuery.of(context).size.width,
-                    decoration:BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: Colors.grey[300],
-                    ),
-
-                    child: TextField(
-                      controller: searchController,
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          hintText: "Search",
-                          border: InputBorder.none
+                  SizedBox(
+                    width: 380.0,
+                    child: TextLiquidFill(
+                      text: '"Artists welcome here! Share and shine with your products."',
+                      waveColor: Colors.deepPurple,
+                      boxBackgroundColor: Color(0xFFB39DDB), // Light Purple Color
+                      textStyle: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
                       ),
+                      boxHeight: 180.0,
                     ),
                   ),
-
+                  SizedBox(height: 20,),
                   GridView.count(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -251,41 +248,41 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Aevent()));
                         ),
                       ),
 
-                      Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(0,17),
-                                  blurRadius: 17,
-                                  spreadRadius: -23
-                              )
-                            ]
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Aorder()));
-                            },
-                            child: Column(
-                              children: [
-
-                                new Image.asset('images/orders.png',
-                                  height: 90,
-                                  width: 150,
-                                  alignment: Alignment.center,
-                                ),
-                                SizedBox(height: 10,),
-                                Text('Orders',textAlign: TextAlign.center,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),)
-
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //   padding: EdgeInsets.all(20),
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.white,
+                      //       borderRadius: BorderRadius.circular(15),
+                      //       boxShadow: [
+                      //         BoxShadow(
+                      //             offset: Offset(0,17),
+                      //             blurRadius: 17,
+                      //             spreadRadius: -23
+                      //         )
+                      //       ]
+                      //   ),
+                      //   child: Material(
+                      //     color: Colors.transparent,
+                      //     child: InkWell(
+                      //       onTap: () {
+                      //         Navigator.push(context, MaterialPageRoute(builder: (context) => Aorder()));
+                      //       },
+                      //       child: Column(
+                      //         children: [
+                      //
+                      //           new Image.asset('images/orders.png',
+                      //             height: 90,
+                      //             width: 150,
+                      //             alignment: Alignment.center,
+                      //           ),
+                      //           SizedBox(height: 10,),
+                      //           Text('Orders',textAlign: TextAlign.center,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),)
+                      //
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -373,13 +370,20 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Aevent()));
 
       ),
       appBar: AppBar(
-        /*leading: IconButton(onPressed: () {
-
-          }, icon: Icon(Icons.menu)),*/
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
         title: Text("Home"),
       ),
       drawer: Drawer(
         child: ListView(
+
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
@@ -389,8 +393,11 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Aevent()));
                 backgroundColor: Colors.white,
                 child: Text(
                   "A",
-                  style: TextStyle(fontSize: 40.0),
+                  style: TextStyle(fontSize: 40.0,color: Colors.deepPurple),
                 ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
               ),
             ),
 
@@ -420,6 +427,15 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => Aevent()));
               title: const Text('Complaint'),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Acomplaint()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.task,
+              ),
+              title: const Text('Orders'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Aorder()));
               },
             ),
 

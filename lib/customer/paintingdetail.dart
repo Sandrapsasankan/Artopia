@@ -15,7 +15,8 @@ class product3 extends StatefulWidget {
 }
 
 class _product3State extends State<product3> {
-  late int id,productid;
+  late int id;
+  late int productid;
   bool   _isLoading = false;
   late SharedPreferences localStorage;
   TextEditingController nameController=TextEditingController();
@@ -67,6 +68,7 @@ class _product3State extends State<product3> {
     var body = json.decode(res.body);
     print(body);
     setState(() {
+
       name = body['data']['name'];
       amount = body['data']['amount'];
       description = body['data']['description'];
@@ -132,7 +134,7 @@ class _product3State extends State<product3> {
                       color: Colors.deepPurple)
               ),
             ),
-           // SizedBox(height: 16,),
+            SizedBox(height: 16,),
             Container(
               height: 200,
               width: 250,
@@ -213,21 +215,24 @@ class _product3State extends State<product3> {
                 color: Colors.black,)),
             ),
             SizedBox(height: 10.0),
-            Text(description,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Varela',
-                  fontSize: 16.0,
-                  color: Colors.black,)
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0,right: 8.0,top: 20.0),
+              child: Text(description,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontFamily: 'Varela',
+                    fontSize: 16.0,
+                    color: Colors.black,)
+              ),
             ),
-            SizedBox(height: 100.0),
+            SizedBox(height: 70.0),
            Padding(
              padding: const EdgeInsets.all(8.0),
              child: Material(
                color: Colors.deepPurple,
                child: InkWell(
                  onTap: () {
-                   AddCart(productid);
+                   AddCart(widget.id);
                  },
                  child: const SizedBox(
                    height: kToolbarHeight,

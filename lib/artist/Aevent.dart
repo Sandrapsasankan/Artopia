@@ -94,7 +94,7 @@ class _AeventState extends State<Aevent> {
                             _loaddata[index]['name'],
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-
+                        subtitle: Text(_loaddata[index]['place']),
 
                         trailing:
                 ElevatedButton(

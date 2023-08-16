@@ -23,11 +23,10 @@ class _profileState extends State<profile> {
   late int user_id;
   String name='';
   String place='';
-  String contact='';
+  String phone_number='';
 
   late SharedPreferences prefs;
   TextEditingController nameController=TextEditingController();
-  TextEditingController addressController=TextEditingController();
   TextEditingController placeController=TextEditingController();
   TextEditingController phnController=TextEditingController();
   @override
@@ -51,12 +50,12 @@ class _profileState extends State<profile> {
     setState(() {
       name = body['data']['name'];
       place = body['data']['place'];
-      contact = body['data']['phone_number'];
+      phone_number = body['data']['phone_number'];
 
 
       nameController.text = name;
       placeController.text=place;
-      phnController.text=contact;
+      phnController.text=phone_number;
 
     });
   }
@@ -72,7 +71,7 @@ class _profileState extends State<profile> {
     var request = http.MultipartRequest('PUT', uri);
     request.fields['name'] = name;
     request.fields['place'] = place;
-    request.fields['phone_number'] = contact;
+    request.fields['phone_number'] = phone_number;
 
 
     print(request.fields);
@@ -84,7 +83,7 @@ class _profileState extends State<profile> {
     if (response.statusCode == 200) {
       print('Profile Updated successfully');
       Navigator.push(
-          this.context, MaterialPageRoute(builder: (context) => Ahome()));
+          this.context, MaterialPageRoute(builder: (context) => Homescreen()));
     } else {
       print('Error Updating profile. Status code: ${response.statusCode}');
     }

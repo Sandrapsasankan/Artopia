@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:helloworld/customer/cart.dart';
 import 'package:helloworld/customer/chat.dart';
@@ -38,7 +39,21 @@ class _HomescreenState extends State<Homescreen> {
               physics: ScrollPhysics(),
               child: Column(
                 children: [
-                 SizedBox(height: 50,),
+                  SizedBox(
+                    width: 350.0,
+                    child: TextLiquidFill(
+                      text: '"Curated Creativity, Yours to Own."',
+                      waveColor: Colors.deepPurple,
+                      boxBackgroundColor: Color(0xFFB39DDB), // Light Purple Color
+                      textStyle: TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      boxHeight: 180.0,
+                    ),
+                  ),
+
+                  SizedBox(height: 30,),
 
                   GridView.count(
                     shrinkWrap: true,
@@ -82,8 +97,6 @@ class _HomescreenState extends State<Homescreen> {
                           ),
                         ),
                       ),
-
-
                       Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -119,9 +132,6 @@ class _HomescreenState extends State<Homescreen> {
                           ),
                         ),
                       ),
-
-
-
                       Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -157,7 +167,6 @@ class _HomescreenState extends State<Homescreen> {
                           ),
                         ),
                       ),
-
                       Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -193,7 +202,6 @@ class _HomescreenState extends State<Homescreen> {
                           ),
                         ),
                       ),
-
                       Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -315,9 +323,12 @@ class _HomescreenState extends State<Homescreen> {
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(
-                  "S",
-                  style: TextStyle(fontSize: 40.0),
+                  "A",
+                  style: TextStyle(fontSize: 40.0,color: Colors.deepPurple),
                 ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
               ),
             ),
 

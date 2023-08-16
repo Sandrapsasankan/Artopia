@@ -66,7 +66,7 @@ SizedBox(height: 70,),
           },
           child: Column(
           children: [
-          new Image.asset('images/events.jpeg',
+          new Image.asset('images/userm.png',
           height: 90,
           width: 150,
           alignment: Alignment.center,
@@ -102,7 +102,7 @@ SizedBox(height: 70,),
                       },
                       child: Column(
                         children: [
-                          new Image.asset('images/events.jpeg',
+                          new Image.asset('images/artistm.jpeg',
                             height: 90,
                             width: 150,
                             alignment: Alignment.center,

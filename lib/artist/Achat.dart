@@ -89,12 +89,19 @@ class _AchatState extends State<Achat> {
     return Scaffold(
 
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        centerTitle:true,
-        // leading:
-        // IconButton( onPressed: (){
-        //   Navigator.pop(context);
-        // },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
         title: Text("Customer Messages"),
       ),
 
@@ -102,6 +109,7 @@ class _AchatState extends State<Achat> {
         physics: ScrollPhysics(),
         child: Column(
           children: [
+            SizedBox(height: 20,),
             ListView.builder(
 
                 physics: NeverScrollableScrollPhysics(),
@@ -114,18 +122,20 @@ class _AchatState extends State<Achat> {
                     onTap: () => {
 
                     },
-                    //
+
                     child: ListTile(
 
                       // subtitle: Text("24/06/23"),
-                        leading: Icon(Icons.message,color: Colors.red,),
+                        leading: Icon(Icons.message,color: Colors.deepPurple,),
                         title:  Text(
                           _loaddata[index]['u_name'],
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26),
                         ),
                         subtitle: Text(_loaddata[index]['message']),
                         trailing: ElevatedButton(
-
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple,
+                          ),
                           onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => Achat2(id:id) ));
                           },

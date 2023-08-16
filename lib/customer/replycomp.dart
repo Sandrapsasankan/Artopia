@@ -98,26 +98,39 @@ class _replycompState extends State<replycomp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-        title: Text("Artist Reply"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
+
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+        title: Text("Complaint Reply"),
       ),
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Column(
           children: [
+            SizedBox(height: 20,),
             ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               itemCount: _loaddata.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: Icon(Icons.message, color: Colors.red),
+                  leading: Icon(Icons.message, color: Colors.deepPurple),
                   title: Text(
                     _loaddata[index]['a_name'],
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),
                   ),
-                  subtitle: Text(_loaddata[index]['reply']),
+                  subtitle: Text(_loaddata[index]['reply'], style: TextStyle(fontSize: 20),),
                 );
               },
             ),

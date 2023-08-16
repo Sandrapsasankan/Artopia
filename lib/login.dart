@@ -32,7 +32,7 @@ class _loginState extends State<login> {
   String storedvalue = "1";
   TextEditingController userController = TextEditingController();
   TextEditingController pwdController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
 
   _pressLoginButton() async {
     setState(() {
@@ -85,107 +85,127 @@ class _loginState extends State<login> {
       return Scaffold(
 
             body: SingleChildScrollView(
-              child: Column(
+              child: Form(
+                key: _formKey,
+                autovalidateMode: AutovalidateMode.always,
+                child: Column(
 
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 50.0,),
-                  Text("LOGIN", style: TextStyle(color: Colors.black,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 50.0,),
+                    Text("LOGIN", style: TextStyle(color: Colors.black,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold),
 
-                  ),
-
-                  SizedBox(height: 10.0,),
-                  Align(alignment: Alignment.center,
-                    child: Text('welcome back!!!!!!!!!',
-                      style: TextStyle(color: Colors.black, fontSize: 17),
-                      textAlign: TextAlign.center,),
-
-                  ), SizedBox(height: 20.0,),
-
-                  Container(
-height: 300,
-                    child:
-                    Image.asset('images/loginpage.jpg',
-                      fit: BoxFit.cover,
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: TextField(
-                      controller: userController,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.person),
-                        labelText: "username",
-                        hintText: "username",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
+
+                    SizedBox(height: 10.0,),
+                    Align(alignment: Alignment.center,
+                      child: Text('welcome back!!!!!!!!!',
+                        style: TextStyle(color: Colors.black, fontSize: 17),
+                        textAlign: TextAlign.center,),
+
+                    ), SizedBox(height: 20.0,),
+
+                    Container(
+height: 300,
+                      child:
+                      Image.asset('images/loginpage.jpg',
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ), SizedBox(height: 15),
-
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: TextField(
-                      controller: pwdController,
-                      obscureText: _obscureText,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
-                        labelText: 'Password',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscureText ? Icons.visibility : Icons.visibility_off,
-                          ),
-                          onPressed: _togglePasswordVisibility,
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: TextFormField(
+                        // The validator receives the text that the user has entered.
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                        controller: userController,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person),
+                          labelText: "username",
+                          hintText: "username",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30)),
                         ),
                       ),
+                    ), SizedBox(height: 15),
+
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: TextFormField(
+                        validator: (valuePass) {
+                          if (valuePass!.isEmpty) {
+                            return 'Please enter your Password';
+                          }else if(valuePass.length<6){
+                            return 'Password too short';
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: pwdController,
+                        obscureText: _obscureText,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
+                          labelText: 'Password',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText ? Icons.visibility : Icons.visibility_off,
+                            ),
+                            onPressed: _togglePasswordVisibility,
+                          ),
+                        ),
+
+                      ),
+                    ),
+                    SizedBox(height: 20.0,),
+                    TextButton(onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Fpassword()));
+                    },
+                      child: Text(
+                        "Forget password?", style: TextStyle(fontSize: 14,color: Colors.purple),),),
+                    SizedBox(height: 20,),
+                    ElevatedButton(
+                      child: Text("Login", style: TextStyle(color: Colors.white,fontSize: 20),),
+                      onPressed: () {
+                        _pressLoginButton();
+                      },
+                      style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0)),
+                          primary: Colors.deepPurple,
+                          fixedSize: Size(300, 50)),
 
                     ),
-                  ),
-                  SizedBox(height: 20.0,),
-                  TextButton(onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Fpassword()));
-                  },
-                    child: Text(
-                      "Forget password?", style: TextStyle(fontSize: 14,color: Colors.purple),),),
-                  SizedBox(height: 20,),
-                  ElevatedButton(
-                    child: Text("Login", style: TextStyle(color: Colors.white,fontSize: 20),),
-                    onPressed: () {
-                      _pressLoginButton();
-                    },
-                    style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0)),
-                        primary: Colors.deepPurple,
-                        fixedSize: Size(300, 50)),
 
-                  ),
-
-                  SizedBox(height: 10.0,),
-                  Row(
-                    children: [
-                      const Text('Does not have an account?',
-                        style: TextStyle(fontSize: 16),),
-                      SizedBox(width: 10,),
-                      TextButton(onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => choose()));
-                      },
-                        child: const Text(
-                          'Register Here', style: TextStyle(fontSize: 16,color:Colors.purple),),),
+                    SizedBox(height: 10.0,),
+                    Row(
+                      children: [
+                        const Text('Does not have an account?',
+                          style: TextStyle(fontSize: 16),),
+                        SizedBox(width: 10,),
+                        TextButton(onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => choose()));
+                        },
+                          child: const Text(
+                            'Register Here', style: TextStyle(fontSize: 16,color:Colors.purple),),),
 
 
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.center,
-                  ),
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
 
 
-                ],
+                  ],
 
+                ),
               ),
             )
 

@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
 import 'package:helloworld/customer/home.dart';
 import 'package:helloworld/customer/chat.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -27,15 +28,18 @@ class _Complaint_DetailsState extends State<Complaint_Details> {
   late int artist_id;
   late SharedPreferences localStorage;
   bool  _isLoading = false;
+
+  String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
   TextEditingController complaintController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _viewPro();
+   // _viewPro();
   }
 
-  Future<void> _viewPro() async {
+ /* Future<void> _viewPro() async {
     int id = widget.id;
     print("id${id}");
 
@@ -51,7 +55,7 @@ class _Complaint_DetailsState extends State<Complaint_Details> {
 
     });
   }
-  Future<void> chat() async {
+ */ Future<void> chat() async {
     setState(() {
       _isLoading = true;
     });
@@ -62,7 +66,7 @@ class _Complaint_DetailsState extends State<Complaint_Details> {
     var data = {
       "user": user_id.toString(),
       "artist":id.toString(),
-
+       "date":formattedDate,
       "complaint":complaintController.text,
 
     };
@@ -101,19 +105,37 @@ class _Complaint_DetailsState extends State<Complaint_Details> {
     return Scaffold(
 
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
+
+
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+
         title: Text('Messaging'),
       ),
 
       body:  SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: size.height*.35,
-              child:
-              Image.asset('images/message.jpg',
-                fit: BoxFit.cover,
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: size.height*.35,
+                child:
+                Image.asset('images/complaint123.jpeg',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Padding(
@@ -150,7 +172,7 @@ class _Complaint_DetailsState extends State<Complaint_Details> {
                     chat();
                   },
                   child: Text('Send',style: TextStyle(fontSize: 19),),
-                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(29.0)),primary: Colors.blue),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(29.0)),primary: Colors.deepPurple),
                 ),
               ),
 

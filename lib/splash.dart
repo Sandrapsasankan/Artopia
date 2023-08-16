@@ -7,7 +7,7 @@ import 'package:helloworld/artist/Aregister.dart';
 import 'package:helloworld/customer/home.dart';
 import 'package:helloworld/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 class SplashScreen extends StatefulWidget {
 
   const SplashScreen({Key? key}) : super(key: key);
@@ -68,17 +68,39 @@ startTime() async {
 @override
 Widget build(BuildContext context) {
 
-  return Scaffold(
 
-    body: Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('images/img_3.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: null /* add child content here */,
-    ),
-  );
+       return Container(
+         decoration: const BoxDecoration(
+           image: DecorationImage(
+               image: AssetImage("images/splash.jpeg"),
+               fit: BoxFit.cover),
+         ),
+         child: Column(
+           mainAxisAlignment: MainAxisAlignment.center,
+           crossAxisAlignment: CrossAxisAlignment.center,
+           children: [ SizedBox(
+           width: 250.0,
+           child: DefaultTextStyle(
+             style: const TextStyle(
+               color: Colors.white,fontWeight: FontWeight.bold,
+               fontSize: 50.0,
+               fontFamily: 'Canterbury',
+             ),
+             child: AnimatedTextKit(
+               animatedTexts: [
+                 ScaleAnimatedText('ARTOPIA'),
+                 ScaleAnimatedText('ARTOPIA'),
+                 ScaleAnimatedText('ARTOPIA'),
+               ],
+               onTap: () {
+                 print("Tap Event");
+               },
+             ),
+           ),
+         )
+           ],
+         ),
+       );
+
 }
 }

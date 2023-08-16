@@ -36,7 +36,7 @@ class _ShoweventState extends State<Showevent> {
       name = body['data']['name'];
       place = body['data']['place'];
       description = body['data']['description'];
-      date = body['data']['date'];
+      date = body['data']['date']==null?"":body['data']['date'];
       time = body['data']['time'];
       image = body['data']['image'];
 

@@ -37,10 +37,13 @@ class _PaymentState extends State<Payment> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            // title: const Text("payment successfull"),
-            content: Image.asset("images/paymnt.jpg"),
+           title:  Text("Your payment is successful!!!!",style: TextStyle(fontSize: 20,color: Colors.black),),
             actions: [
-              ElevatedButton(onPressed: (){
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                  ),
+                  onPressed: (){
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (context) => Homescreen()));
               }, child: Text("OK"))
@@ -100,7 +103,15 @@ class _PaymentState extends State<Payment> {
 
 
     return  Scaffold( appBar: AppBar(
-      title: Text("Payments"),
+      title: Text("Payments"),flexibleSpace: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.blue, Colors.purple],
+        ),
+      ),
+    ),
       leading:IconButton(
         icon:Icon(Icons.arrow_back), onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context)=>Homescreen()));
@@ -192,7 +203,7 @@ class _PaymentState extends State<Payment> {
                 width: 100,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
+                      primary: Colors.deepPurple,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),

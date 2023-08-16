@@ -52,19 +52,21 @@ class _ComplaintState extends State<Complaint> {
     return Scaffold(
 
         appBar: AppBar(
-          backgroundColor: Colors.blue,
-          centerTitle: true,
-          // leading:
-          // IconButton( onPressed: (){
-          //   Navigator.pop(context);
-          // },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.blue, Colors.purple],
+              ),
+            ),
+          ),
           title: Text("Artists"),
-          // actions: [
-          //   IconButton(icon: Icon(Icons.add), onPressed: () {
-          //     //Navigator.push(context, MaterialPageRoute(builder: (context) => packageadd()));
-          //     },
-          //   )
-          //],
+
+          leading:
+          IconButton( onPressed: (){
+            Navigator.pop(context);
+          },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
         ),
 
 
@@ -94,7 +96,7 @@ class _ComplaintState extends State<Complaint> {
                                 ]
                             ),
                           ),
-                          SizedBox(width: 5,),
+
 
                           Row(
                             children: [
@@ -102,7 +104,9 @@ class _ComplaintState extends State<Complaint> {
                                 children:[
 
                                   ElevatedButton(
-
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.deepPurple,
+                                    ),
                                     onPressed: () {
                                       Navigator.push(context, MaterialPageRoute(
                                           builder: (context) => Complaint_Details(id:id)));
@@ -113,7 +117,9 @@ class _ComplaintState extends State<Complaint> {
 
                                   SizedBox(width: 5,),
                                   ElevatedButton(
-
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.deepPurple,
+                                    ),
                                     onPressed: () {
 
 

@@ -105,157 +105,161 @@ class _applyState extends State<apply> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(height: 20,),
+          child: Form(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.always,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(height: 20,),
 
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  controller: nameController,
-                  decoration: const InputDecoration(
-
-                    border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.black), ),
-                    labelText: 'Full Name',
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  controller: addressController,
-                  decoration: const InputDecoration(
-
-                    border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.black),),
-                    labelText: 'Address',
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  validator: (valueMail) {
-                    if (valueMail!.isEmpty) {
-                      return 'Please enter Email Id';
-                    }
-                    RegExp email = new RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                    if (email.hasMatch(valueMail)) {
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
                       return null;
-                    } else {
-                      return 'Invalid Email Id';
-                    }
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  controller: emailController,
-                  decoration: const InputDecoration(
+                    },
+                    controller: nameController,
+                    decoration: const InputDecoration(
 
-                    border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.black),),
-                    labelText: 'Email',
+                      border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.black), ),
+                      labelText: 'Full Name',
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter Mobile Number';
-                    }
-                    RegExp number = new RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
-                    if (number.hasMatch(value)) {
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
                       return null;
-                    } else {
-                      return 'Invalid Mobile Number';
-                    }
-                  },
-                  keyboardType: TextInputType.number,
-                  controller: phn_noController,
-                  decoration: const InputDecoration(
+                    },
+                    controller: addressController,
+                    decoration: const InputDecoration(
 
-                    border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.black),),
-                    labelText: 'Phone Number',
+                      border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.black),),
+                      labelText: 'Address',
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  controller: qualificationController,
-                  decoration: const InputDecoration(
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: TextFormField(
+                    validator: (valueMail) {
+                      if (valueMail!.isEmpty) {
+                        return 'Please enter Email Id';
+                      }
+                      RegExp email = new RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                      if (email.hasMatch(valueMail)) {
+                        return null;
+                      } else {
+                        return 'Invalid Email Id';
+                      }
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailController,
+                    decoration: const InputDecoration(
 
-                    border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.pink),),
-                    labelText: 'Qualification',
+                      border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.black),),
+                      labelText: 'Email',
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  controller: experienceController,
-                  decoration: const InputDecoration(
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter Mobile Number';
+                      }
+                      RegExp number = new RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
+                      if (number.hasMatch(value)) {
+                        return null;
+                      } else {
+                        return 'Invalid Mobile Number';
+                      }
+                    },
+                    keyboardType: TextInputType.number,
+                    controller: phn_noController,
+                    decoration: const InputDecoration(
 
-                    border:  OutlineInputBorder(borderSide:  BorderSide(color: Colors.black)
-                    ),                    labelText: 'Experience',
+                      border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.black),),
+                      labelText: 'Phone Number',
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20,width: 30,),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                    controller: qualificationController,
+                    decoration: const InputDecoration(
+
+                      border: OutlineInputBorder( borderSide: BorderSide(width: 3, color: Colors.pink),),
+                      labelText: 'Qualification',
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      return null;
+                    },
+                    controller: experienceController,
+                    decoration: const InputDecoration(
+
+                      border:  OutlineInputBorder(borderSide:  BorderSide(color: Colors.black)
+                      ),                    labelText: 'Experience',
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20,width: 30,),
 Container(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple,
-                ),
-    child: Text('Choose CV'),
-          onPressed: openFilePicker,
-        ),
-  ),
-              SizedBox(height: 30,),
-              Text(filePath== null?"":filePath.toString()),
-              SizedBox(height: 80,),
-              SizedBox(
-                height: 60,
-                width: 600,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.deepPurple,
                   ),
-                  child: const Text('Submit',style: TextStyle(fontSize: 20),),
-                  onPressed: () {
+    child: Text('Choose CV'),
+            onPressed: openFilePicker,
+        ),
+  ),
+                SizedBox(height: 30,),
+                Text(filePath== null?"":filePath.toString()),
+                SizedBox(height: 80,),
+                SizedBox(
+                  height: 60,
+                  width: 600,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.deepPurple,
+                    ),
+                    child: const Text('Submit',style: TextStyle(fontSize: 20),),
+                    onPressed: () {
 
 
-                    submitForm(nameController.text,addressController.text,emailController.text,phn_noController.text,qualificationController.text,experienceController.text,filePath.toString());
+                      submitForm(nameController.text,addressController.text,emailController.text,phn_noController.text,qualificationController.text,experienceController.text,filePath.toString());
 
-                  },
+                    },
+                  ),
                 ),
-              ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

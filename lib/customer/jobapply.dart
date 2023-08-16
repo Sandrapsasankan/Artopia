@@ -199,7 +199,8 @@ class _jobapplyState extends State<jobapply> {
                     ),
 
                     Text(
-                        description
+                        description,
+                      textAlign: TextAlign.justify,
                     ),
 
                     SizedBox(height: 130,),

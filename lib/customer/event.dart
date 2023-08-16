@@ -97,6 +97,7 @@ class _eventState extends State<event> {
                             _loaddata[index]['name'],
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
+                          subtitle: Text(_loaddata[index]['place']),
 
 
 

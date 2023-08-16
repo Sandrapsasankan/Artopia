@@ -134,13 +134,16 @@ width: 250,
                       Row(
                         children: [
 
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 40,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 40,
 
-                            child: Image(image: NetworkImage(Api().url+ _loaddata[index]['image'])),
+                              child: Image(image: NetworkImage(Api().url+ _loaddata[index]['image']) ,width: 90,height: 100,),
+                            ),
                           ),
-
+SizedBox(width: 10,),
                           Column(
                             children: [
                               SizedBox(height: 20,),

@@ -25,7 +25,7 @@ class _AjobapplyState extends State<Ajobapply> {
   TextEditingController qlfController=TextEditingController();
   TextEditingController descController=TextEditingController();
 
-  var jobname,location,experience,qualification,salary,description;
+  String jobname="",location="",experience="",qualification="",salary="",description="";
 
   Future<void> _viewPro() async {
    int id = widget.id;

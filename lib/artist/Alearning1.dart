@@ -52,7 +52,15 @@ class _Alearning1State extends State<Alearning1> {
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.green,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.blue, Colors.purple],
+                ),
+              ),
+            ),
             title: Text(
               'Videos',
             ),
@@ -141,7 +149,7 @@ class _Alearning1State extends State<Alearning1> {
             },
             label: const Text('New'),
             icon: const Icon(Icons.add),
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.deepPurple,
           ),
         ));
   }

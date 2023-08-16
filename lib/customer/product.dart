@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helloworld/api_service/api.dart';
+import 'package:helloworld/customer/home.dart';
 import 'package:helloworld/customer/product2.dart';
 
 void main() => runApp(product());
@@ -70,20 +71,17 @@ class _MyHomePageState extends State<MyHomePage>
             ),
           ),
         ),
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 20,
-              color: Colors.black,
-            )),
+        leading:
+        IconButton( onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Homescreen()));
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
       ),
-      body: ListView.builder(
+      body: GridView.builder(
 
           itemCount: _loaddata.length,
-          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2),
+
           itemBuilder: (context, index) {
             int id = _loaddata[index]['id'];
             return GestureDetector(
@@ -103,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage>
                   ),
                   SizedBox(
                     width: 45,
-                    height: 17,
+                    height: 10,
                   ),
                   Text(_loaddata[index]['name'],
                       style: TextStyle(

@@ -43,39 +43,7 @@ class _AeventpageState extends State<Aeventpage> {
   TextEditingController dateController=TextEditingController();
   TextEditingController timeController=TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  // void AddEvent()async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //
-  //
-  //   var data = {
-  //     "name": nameController.text.trim(),
-  //     "description": descController.text.trim(),
-  //     "place": placeController.text.trim(),
-  //     "date": startDate,
-  //     "time": timeController.text.trim(),
-  //   };
-  //   print("Event data${data}");
-  //   var res = await Api().authData(data, '/api/add_event');
-  //   var body = json.decode(res.body);
-  //   print('res${body}');
-  //   if (body['success'] == true) {
-  //     Fluttertoast.showToast(
-  //       msg: body['message'].toString(),
-  //       backgroundColor: Colors.grey,
-  //     );
-  //
-  //     Navigator.push(
-  //         context as BuildContext, MaterialPageRoute(builder: (context) => Aevent()));
-  //   }
-  //   else {
-  //     Fluttertoast.showToast(
-  //       msg: body['message'].toString(),
-  //       backgroundColor: Colors.grey,
-  //     );
-  //   }
-  // }
+
   File? imageFile;
 
   late  final _filename;
@@ -217,186 +185,190 @@ class _AeventpageState extends State<Aeventpage> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    // Column(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //   Text('Event Details'),
-                    //   ],
-                    // ),
-
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                          controller: nameController,
-                          decoration: const InputDecoration(
-
-                            border: OutlineInputBorder(),
-                            labelText: 'Event Name',
-                            hintText: 'Event Name'
-                          ),
-
-                      ),
-                    ),
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.always,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      // Column(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: [
+                      //   Text('Event Details'),
+                      //   ],
+                      // ),
 
                       Container(
                         padding: const EdgeInsets.all(10),
                         child: TextFormField(
-
-                          maxLines: 5,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter some text';
                             }
                             return null;
                           },
-                          controller: descController,
-                          decoration: const InputDecoration(
+                            controller: nameController,
+                            decoration: const InputDecoration(
+
                               border: OutlineInputBorder(),
-                              labelText: 'Event Description',
-                              hintText: 'Event Description',
-                          ),
-                        ),
+                              labelText: 'Event Name',
+                              hintText: 'Event Name'
+                            ),
 
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                        controller: placeController,
-                        decoration: const InputDecoration(
-
-                            border: OutlineInputBorder(),
-                            labelText: 'Event Place',
-                            hintText: 'Event Place'
                         ),
                       ),
-                    ),
-                    Container(
-                      padding:  const EdgeInsets.all(20.0),
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.deepPurple,
-                            ),
-                            onPressed: () => _selectDate(context),
-                            child: const Text('Select date'),
-                          ),SizedBox(width: 20,),
-                          Container(
-                            height: 45,
-                            width: 150,
-                            margin: const EdgeInsets.all(15.0),
-                            padding: const EdgeInsets.all(3.0),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black26)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(
-                                '${selectedDate.day}-${selectedDate.month}-${selectedDate.year}',
-                                style: TextStyle(fontSize: 16, color: Colors.black38),
-                              ),
+
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: TextFormField(
+
+                            maxLines: 5,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter some text';
+                              }
+                              return null;
+                            },
+                            controller: descController,
+                            decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Event Description',
+                                hintText: 'Event Description',
                             ),
                           ),
 
-                        ],
                       ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child:TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                        controller: timeController,
-                        decoration: const InputDecoration(
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                          controller: placeController,
+                          decoration: const InputDecoration(
 
-                          border: OutlineInputBorder(),
-                          labelText: 'Event Time',
-                          hintText: 'Event Time',
+                              border: OutlineInputBorder(),
+                              labelText: 'Event Place',
+                              hintText: 'Event Place'
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 30,),
-                    Container(
-
-                      child: imageFile == null
-                          ? Container(
-                        child: Column(
-                          children: <Widget>[
+                      Container(
+                        padding:  const EdgeInsets.all(20.0),
+                        child: Row(
+                          children: [
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.deepPurple,
                               ),
+                              onPressed: () => _selectDate(context),
+                              child: const Text('Select date'),
+                            ),SizedBox(width: 20,),
+                            Container(
+                              height: 45,
+                              width: 150,
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(3.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black26)),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  '${selectedDate.day}-${selectedDate.month}-${selectedDate.year}',
+                                  style: TextStyle(fontSize: 16, color: Colors.black38),
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child:TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter the time';
+                            }
+                            return null;
+                          },
+                          controller: timeController,
+                          decoration: const InputDecoration(
+
+                            border: OutlineInputBorder(),
+                            labelText: 'Event Time',
+                            hintText: 'Event Time',
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 30,),
+                      Container(
+
+                        child: imageFile == null
+                            ? Container(
+                          child: Column(
+                            children: <Widget>[
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.deepPurple,
+                                ),
+                                onPressed: () {
+                                  //    _getFromGallery();
+                                  _showChoiceDialog(context);
+                                },
+                                child: Text("Upload Image"),
+                              ),
+                              Container(
+                                height: 40.0,
+                              ),
+
+                            ],
+                          ),
+                        ): Row(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Image.file(
+                                imageFile!,
+                                width: 100,
+                                height: 100,
+                                //  fit: BoxFit.cover,
+                              ),
+                            ), ElevatedButton(
                               onPressed: () {
                                 //    _getFromGallery();
                                 _showChoiceDialog(context);
                               },
                               child: Text("Upload Image"),
                             ),
-                            Container(
-                              height: 40.0,
-                            ),
-
                           ],
                         ),
-                      ): Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Image.file(
-                              imageFile!,
-                              width: 100,
-                              height: 100,
-                              //  fit: BoxFit.cover,
-                            ),
-                          ), ElevatedButton(
-                            onPressed: () {
-                              //    _getFromGallery();
-                              _showChoiceDialog(context);
-                            },
-                            child: Text("Upload Image"),
+                      ),
+                      SizedBox(height: 90,),
+                      SizedBox(
+                        height: 50,
+                        width: 350,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple,
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 90,),
-                    SizedBox(
-                      height: 50,
-                      width: 350,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.deepPurple,
+                          child: const Text('Submit',style: TextStyle(fontSize: 20),),
+                          onPressed: () {
+                            submitForm(nameController.text,descController.text,placeController.text,timeController.text);
+                          },
                         ),
-                        child: const Text('Submit',style: TextStyle(fontSize: 20),),
-                        onPressed: () {
-                          submitForm(nameController.text,descController.text,placeController.text,timeController.text);
-                        },
                       ),
-                    ),
 
 
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

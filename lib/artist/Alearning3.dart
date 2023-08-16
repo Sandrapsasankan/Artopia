@@ -89,11 +89,11 @@ class _alearningState extends State<alearning> {
   }
   bool _isLoading=false;
   TextEditingController nameController=TextEditingController();
-  TextEditingController descController=TextEditingController();
+
 
   final _formKey = GlobalKey<FormState>();
 
-  var dropdownvalue ;
+
 
 
   File? imageFile;
@@ -172,7 +172,7 @@ class _alearningState extends State<alearning> {
   //     });
   //   }
   // }
-  Future<void> submitForm(String name, String description,String categ, String filepathvideo) async {
+  Future<void> submitForm(String name,  String filepathvideo) async {
     var uri = Uri.parse(Api().url+'/api/add_video'); // Replace with your API endpoint
 
     prefs = await SharedPreferences.getInstance();
@@ -181,9 +181,7 @@ class _alearningState extends State<alearning> {
 
 
     request.fields['name'] = name;
-    request.fields['description'] = description;
 
-    request.fields['category'] = categ;
 
     request.fields['artist'] =artist_id.toString();
 
@@ -217,7 +215,15 @@ class _alearningState extends State<alearning> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add video'),
-        backgroundColor: Colors.green,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
 
       ),
       body:  SingleChildScrollView(
@@ -237,50 +243,39 @@ class _alearningState extends State<alearning> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    child: TextField(
-                      controller: descController,
-                      decoration: const InputDecoration(
 
-                        border: OutlineInputBorder(),
-                        labelText: 'Video Description',
-                        hintText: 'Video Description',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: SizedBox(
-                      width: double.maxFinite,
-                      child: DropdownButtonFormField<String>(
-                          decoration: InputDecoration(
-                            disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)) ,
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                          hint: Text('Categories'),
-                          value: dropdownvalue,
-                          items: _loaddata
-                              .map((type) => DropdownMenuItem<String>(
-                            value: type['id'].toString(),
-                            child: Text(
-                              type['name'].toString(),
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ))
-                              .toList(),
-                          onChanged: (type) {
-                            setState(() {
-                              dropdownvalue = type!;
-                            });
-                          }),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(12.0),
+                  //   child: SizedBox(
+                  //     width: double.maxFinite,
+                  //     child: DropdownButtonFormField<String>(
+                  //         decoration: InputDecoration(
+                  //           disabledBorder: OutlineInputBorder(
+                  //               borderRadius: BorderRadius.circular(5)) ,
+                  //           enabledBorder: OutlineInputBorder(
+                  //               borderRadius: BorderRadius.circular(5)),
+                  //         ),
+                  //         hint: Text('Categories'),
+                  //         value: dropdownvalue,
+                  //         items: _loaddata
+                  //             .map((type) => DropdownMenuItem<String>(
+                  //           value: type['id'].toString(),
+                  //           child: Text(
+                  //             type['name'].toString(),
+                  //             style: TextStyle(color: Colors.black),
+                  //           ),
+                  //         ))
+                  //             .toList(),
+                  //         onChanged: (type) {
+                  //           setState(() {
+                  //             dropdownvalue = type!;
+                  //           });
+                  //         }),
+                  //   ),
+                  // ),
                   ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.green)),
+                        backgroundColor: MaterialStateProperty.all(Colors.deepPurple)),
                     child: const Text('Choose video'),
                     onPressed: () {
                       pickVideo();
@@ -289,15 +284,17 @@ class _alearningState extends State<alearning> {
                   ),
                   SizedBox(height: 30,),
                   Text(filePath== null?"":filePath.toString()),
-                  SizedBox(height: 30,),
+                  SizedBox(height: 70,),
                   Container(
                       height: 50,
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: ElevatedButton(
                         child: const Text('Submit'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple,),
                         onPressed: () {
 
-                          submitForm(nameController.text,descController.text,dropdownvalue,filePath.toString());
+                          submitForm(nameController.text,filePath.toString());
                         },
                       )
                   ),

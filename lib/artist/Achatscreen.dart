@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class Achat2 extends StatefulWidget {
   final int id;
-  const Achat2({required this.id});
+   Achat2({required this.id});
 
   @override
   State<Achat2> createState() => _Achat2State();
@@ -61,18 +61,31 @@ class _Achat2State extends State<Achat2> {
     return Scaffold(
 
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
         title: Text('Messaging'),
       ),
 
       body:  SingleChildScrollView(
         child: Column(
+
           children: [
+            SizedBox(height: 20,),
             Container(
               height: size.height*.35,
               child:
-              Image.asset('images/message.jpg',
+              Image.asset('images/messaging.jpeg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -111,7 +124,8 @@ class _Achat2State extends State<Achat2> {
                     _updatereply(replyController.text);
                   },
                   child: Text('Reply',style: TextStyle(fontSize: 19),),
-                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(29.0)),primary: Colors.blue),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(29.0)),primary: Colors.deepPurple),
                 ),
               ),
 

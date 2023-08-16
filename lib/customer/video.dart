@@ -54,6 +54,21 @@ class _VideoPlayerScreensState extends State<VideoPlayerScreens> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
+
+        flexibleSpace: Container(
+        decoration: BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.blue, Colors.purple],
+    ),
+    ),
+    ),
+    leading:
+    IconButton( onPressed: (){
+    Navigator.pop(context);
+    },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
         title: Text('Video Player'),
       ),
       body: FutureBuilder(

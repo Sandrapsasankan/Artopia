@@ -101,18 +101,31 @@ class _chatscreenState extends State<chatscreen> {
     return Scaffold(
 
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blue,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
+
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
         title: Text('Messaging'),
       ),
 
       body:  SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 25,),
             Container(
               height: size.height*.35,
               child:
-              Image.asset('images/message.jpg',
+              Image.asset('images/messaging.jpeg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -150,7 +163,8 @@ class _chatscreenState extends State<chatscreen> {
                     chat();
                   },
                   child: Text('Send',style: TextStyle(fontSize: 19),),
-                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(29.0)),primary: Colors.blue),
+                  style: ElevatedButton.styleFrom(fixedSize: Size(230, 55),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(29.0)),primary: Colors.deepPurple),
                 ),
               ),
 

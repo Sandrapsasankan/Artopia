@@ -233,138 +233,180 @@ class _AaddproductsState extends State<Aaddproducts> {
         title: Text('Add product'),
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: Form(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.always,
+          child: Column(
 
-          children: [
-            SizedBox(height: 20,),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: nameController,
-                decoration: const InputDecoration(
-
-                  border: OutlineInputBorder(),
-                  labelText: 'Product Name',
-                  hintText: 'Product Name',
+            children: [
+              SizedBox(height: 20,),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'This field is required';
+                    }
+                    return null;
+                  },
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Product Name',
+                    hintText: 'Product Name',
+                  ),
                 ),
               ),
-            ),
 
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: amountController,
-                decoration: const InputDecoration(
 
-                  border: OutlineInputBorder(),
-                  labelText: 'Product Price',
-                  hintText: 'Product Price',
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a value';
+                    }
+
+                    // Check if the input is a valid numeric value
+                    if (double.tryParse(value) == null) {
+                      return 'Please enter a valid number';
+                    }
+
+                    // Check if the numeric value is within a certain range (for example, between 0 and 1000)
+                    final double amount = double.parse(value);
+                    if (amount < 0 || amount > 1000) {
+                      return 'Amount must be between 0 and 1000';
+                    }
+
+                    return null; // Input is valid
+                  },
+                  controller: amountController,
+                  keyboardType: TextInputType.number, // Use numeric keyboard
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Product Price',
+                    hintText: 'Product Price',
+                  ),
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: descController,
-                decoration: const InputDecoration(
 
-                  border: OutlineInputBorder(),
-                  labelText: 'Product Description',
-                  hintText: 'Product Description',
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  controller: descController,
+                  decoration: const InputDecoration(
+
+                    border: OutlineInputBorder(),
+                    labelText: 'Product Description',
+                    hintText: 'Product Description',
+                  ),
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: dimensionController,
-                decoration: const InputDecoration(
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the product dimension';
+                    }
+                    return null;
+                  },
+                  controller: dimensionController,
+                  decoration: const InputDecoration(
 
-                  border: OutlineInputBorder(),
-                  labelText: 'Product Dimension',
-                  hintText: 'Product Dimension',
+                    border: OutlineInputBorder(),
+                    labelText: 'Product Dimension',
+                    hintText: 'Product Dimension',
+                  ),
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: colourController,
-                decoration: const InputDecoration(
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  controller: colourController,
+                  decoration: const InputDecoration(
 
-                  border: OutlineInputBorder(),
-                  labelText: 'Product Colour',
-                  hintText: 'Product Colour',
+                    border: OutlineInputBorder(),
+                    labelText: 'Product Colour',
+                    hintText: 'Product Colour',
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: SizedBox(
-                width: double.maxFinite,
-                child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5)) ,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                    ),
-                    hint: Text('Categories'),
-                    value: dropdownvalue,
-                    items: _loaddata
-                        .map((type) => DropdownMenuItem<String>(
-                      value: type['id'].toString(),
-                      child: Text(
-                        type['name'].toString(),
-                        style: TextStyle(color: Colors.black),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SizedBox(
+                  width: double.maxFinite,
+                  child: DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5)) ,
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5)),
                       ),
-                    ))
-                        .toList(),
-                    onChanged: (type) {
-                      setState(() {
-                        dropdownvalue = type!;
-                      });
-                    }),
+                      hint: Text('Categories'),
+                      value: dropdownvalue,
+                      items: _loaddata
+                          .map((type) => DropdownMenuItem<String>(
+                        value: type['id'].toString(),
+                        child: Text(
+                          type['name'].toString(),
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ))
+                          .toList(),
+                      onChanged: (type) {
+                        setState(() {
+                          dropdownvalue = type!;
+                        });
+                      }),
+                ),
               ),
-            ),
-            SizedBox(height: 20,),
-            Container(
+              SizedBox(height: 20,),
+              Container(
 
-              child: imageFile == null
-                  ? Container(
-                child: Column(
-                  children: <Widget>[
-                    ElevatedButton(
+                child: imageFile == null
+                    ? Container(
+                  child: Column(
+                    children: <Widget>[
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.deepPurple,
+                        ),
+                        onPressed: () {
+                          //    _getFromGallery();
+                          _showChoiceDialog(context);
+                        },
+                        child: Text("Upload Image"),
+                      ),
+                      Container(
+                        height: 40.0,
+                      ),
+
+                    ],
+                  ),
+                ): Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Image.file(
+                        imageFile!,
+                        width: 100,
+                        height: 100,
+                        //  fit: BoxFit.cover,
+                      ),
+                    ), ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: Colors.deepPurple,
                       ),
@@ -374,51 +416,26 @@ class _AaddproductsState extends State<Aaddproducts> {
                       },
                       child: Text("Upload Image"),
                     ),
-                    Container(
-                      height: 40.0,
-                    ),
-
                   ],
                 ),
-              ): Row(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Image.file(
-                      imageFile!,
-                      width: 100,
-                      height: 100,
-                      //  fit: BoxFit.cover,
-                    ),
-                  ), ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.deepPurple,
-                    ),
-                    onPressed: () {
-                      //    _getFromGallery();
-                      _showChoiceDialog(context);
-                    },
-                    child: Text("Upload Image"),
+              ),
+              SizedBox(height: 88,),
+              SizedBox(
+                height: 60,
+                width: 350,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
                   ),
-                ],
-              ),
-            ),
-            SizedBox(height: 88,),
-            SizedBox(
-              height: 60,
-              width: 350,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple,
+                  child: const Text('Submit',style: TextStyle(fontSize: 25),),
+                  onPressed: () {
+                    submitForm(nameController.text,descController.text,amountController.text,dimensionController.text,colourController.text,dropdownvalue);
+                  },
                 ),
-                child: const Text('Submit',style: TextStyle(fontSize: 25),),
-                onPressed: () {
-                  submitForm(nameController.text,descController.text,amountController.text,dimensionController.text,colourController.text,dropdownvalue);
-                },
               ),
-            ),
 
-          ],
+            ],
+          ),
         ),
       ),
 

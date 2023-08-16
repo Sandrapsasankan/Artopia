@@ -50,87 +50,97 @@ class _chatState extends State<chat> {
     return Scaffold(
 
         appBar: AppBar(
-          backgroundColor: Colors.blue,
-          centerTitle: true,
-          // leading:
-          // IconButton( onPressed: (){
-          //   Navigator.pop(context);
-          // },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.blue, Colors.purple],
+              ),
+            ),
+          ),
+
+          leading:
+          IconButton( onPressed: (){
+            Navigator.pop(context);
+          },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
           title: Text("Artists"),
-          // actions: [
-          //   IconButton(icon: Icon(Icons.add), onPressed: () {
-          //     //Navigator.push(context, MaterialPageRoute(builder: (context) => packageadd()));
-          //     },
-          //   )
-          //],
+
         ),
 
 
-        body: ListView.builder(
+        body: Column(
+          children: [
+            SizedBox(height: 30,),
+            ListView.builder(
 
-            itemCount: _loaddata.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              int id = _loaddata[index]['id'];
-              return Card(
-                margin: const EdgeInsets.all(10),
-                child: SizedBox(
-                    width: 250,
-                    height: 100,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-
-                          Padding(
-                            padding: const EdgeInsets.only(top:16,right: 12,left: 12),
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-
-                                  Text(_loaddata[index]['name'],style: TextStyle(fontSize: 20),textAlign: TextAlign.justify,),
-                                ]
-                            ),
-                          ),
-                          SizedBox(width: 5,),
-
-                          Row(
+                itemCount: _loaddata.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  int id = _loaddata[index]['id'];
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    child: SizedBox(
+                        width: 250,
+                        height: 100,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+
+                              Padding(
+                                padding: const EdgeInsets.only(top:16,right: 12,left: 12),
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+
+                                      Text(_loaddata[index]['name'],style: TextStyle(fontSize: 20),textAlign: TextAlign.justify,),
+                                    ]
+                                ),
+                              ),
+                              SizedBox(width: 5,),
+
                               Row(
-                                children:[
+                                children: [
+                                  Row(
+                                    children:[
 
-                                  ElevatedButton(
-
-                                    onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(
-                                          builder: (context) => chatscreen(id:id)));
-                                    },
-                                    child: const Text('Message'),
-                                  ),
-
-
-                                  SizedBox(width: 5,),
-                                  ElevatedButton(
-
-                                    onPressed: () {
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.deepPurple,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(
+                                              builder: (context) => chatscreen(id:id)));
+                                        },
+                                        child: const Text('Message'),
+                                      ),
 
 
-                                      Navigator.push(context, MaterialPageRoute(
-                                          builder: (context) => reply(id:id)));
-                                    },
-                                    child: const Text('Reply'),
+                                      SizedBox(width: 5,),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.deepPurple,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(
+                                              builder: (context) => reply(id:id)));
+                                        },
+                                        child: const Text('Reply'),
+                                      ),
+                                    ],
+
                                   ),
                                 ],
 
-                              ),
-                            ],
-
-                          )
-                        ]
-                    )
-                ),
-              );
-            }
+                              )
+                            ]
+                        )
+                    ),
+                  );
+                }
+            ),
+          ],
         )
 
     );

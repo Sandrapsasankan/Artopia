@@ -60,6 +60,10 @@ class _ApaymentState extends State<Apayment> {
             ),
           ),
         ),
+        leading:
+        IconButton( onPressed: (){
+          Navigator.pop(context);
+        },icon:Icon(Icons.arrow_back_ios,size: 20,color: Colors.black,)),
         title: Text('Payment_Details',),
 
       ),
@@ -79,21 +83,19 @@ class _ApaymentState extends State<Apayment> {
                   children: [
                     CircleAvatar(
                       backgroundColor: Colors.white,
-                      child: Icon(Icons.payment,color: Colors.green,size: 36,),
+                      child: Icon(Icons.payment,color: Colors.deepPurple,size: 36,),
                     ),
                     SizedBox(width: 16,),
                     Container(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
-                          Text(_loaddata[index]['name'],style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,),
-                          Text(_loaddata[index]['amount'],style: TextStyle(fontSize: 16),textAlign: TextAlign.justify,),
-
-
+                          Text("Name: ${_loaddata[index]['name']}", style: TextStyle(fontSize: 16), textAlign: TextAlign.justify),
+                          Text("Amount: ${_loaddata[index]['amount']}", style: TextStyle(fontSize: 16), textAlign: TextAlign.justify),
                         ],
                       ),
                     ),
+
                     SizedBox(width: 14,),
 
                     Text(_loaddata[index]['date'],style: TextStyle(fontSize: 15))

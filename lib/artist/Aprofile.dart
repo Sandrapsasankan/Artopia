@@ -99,11 +99,20 @@ class _AprofileState extends State<Aprofile> {
 
       appBar: AppBar(
         title: Text("Profile"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue, Colors.purple],
+            ),
+          ),
+        ),
         leading: IconButton(
           onPressed: (){
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back_ios,color: Colors.black,),
         ),
         actions: [
           IconButton(
@@ -188,7 +197,7 @@ class _AprofileState extends State<Aprofile> {
                     },
                     child: Text("EDIT",style: TextStyle(fontSize: 15, letterSpacing: 2, color: Colors.white),),
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
+                        primary: Colors.deepPurple,
                         padding: EdgeInsets.symmetric(horizontal: 50),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
                     ),
@@ -221,7 +230,7 @@ class _AprofileState extends State<Aprofile> {
           //     ):null,
           contentPadding: EdgeInsets.only(bottom: 5),
           labelText: labelText,
-          labelStyle: TextStyle(fontSize: 18,color: Colors.blue),
+          labelStyle: TextStyle(fontSize: 18,color: Colors.deepPurple),
           floatingLabelBehavior: FloatingLabelBehavior.always,
 
           // hintText: controller,
